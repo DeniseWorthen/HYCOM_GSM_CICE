@@ -1,0 +1,37 @@
+# HYCOM-Ice Model
+#
+## NEMS Application Builder file
+
+COMPONENTS=( "HYCOM" "CICE" )
+
+# HYCOM
+HYCOM_SRCDIR=$ROOTDIR/HYCOM
+HYCOM_BINDIR=$ROOTDIR/HYCOM-INSTALL
+
+# CICE
+CICE_SRCDIR=$ROOTDIR/CICE
+CICE_BINDIR=$ROOTDIR/CICE-INSTALL
+
+# Zeus environment
+environment_zeus(){
+  source /etc/profile
+  module purge
+  module use ~Gerhard.Theurich/Modulefiles
+  module load intel mpt/2.06 netcdf/4.1.3-intel esmf/7.0.0bs46-netcdf4.1.3
+}
+
+# Gaea environment
+environment_gaea(){
+  source /etc/profile
+  module purge
+  module use ~Gerhard.Theurich/Modulefiles
+  module load PrgEnv-intel xt-mpich2 xtpe-interlagos netcdf esmf/7.0.0bs46
+}
+
+# Theia environment
+environment_theia(){
+  source /etc/profile
+  module use ~Gerhard.Theurich/Modulefiles
+  module load intel impi esmf/7.0.0bs46-theia
+}
+
