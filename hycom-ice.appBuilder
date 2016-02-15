@@ -2,7 +2,7 @@
 #
 ## NEMS Application Builder file
 
-COMPONENTS=( "HYCOM" "CICE" )
+COMPONENTS=( HYCOM CICE )
 
 # HYCOM
 HYCOM_SRCDIR=$ROOTDIR/HYCOM
@@ -12,26 +12,33 @@ HYCOM_BINDIR=$ROOTDIR/HYCOM-INSTALL
 CICE_SRCDIR=$ROOTDIR/CICE
 CICE_BINDIR=$ROOTDIR/CICE-INSTALL
 
-# Zeus environment
-environment_zeus(){
-  source /etc/profile
-  module purge
-  module use ~Gerhard.Theurich/Modulefiles
-  module load intel mpt/2.06 netcdf/4.1.3-intel esmf/7.0.0bs46-netcdf4.1.3
-}
-
 # Gaea environment
 environment_gaea(){
   source /etc/profile
-  module purge
   module use ~Gerhard.Theurich/Modulefiles
-  module load PrgEnv-intel xt-mpich2 xtpe-interlagos netcdf esmf/7.0.0bs46
+  module swap PrgEnv-pgi PrgEnv-intel
+  module load cray-netcdf esmf/7.0.0
 }
 
 # Theia environment
 environment_theia(){
   source /etc/profile
-  module use ~Gerhard.Theurich/Modulefiles
-  module load intel impi esmf/7.0.0bs46-theia
+  module use /scratch4/NCEPDEV/nems/save/Gerhard.Theurich/Modulefiles
+  module load intel impi netcdf esmf/7.0.0
+}
+
+# Yellowstone environment
+environment_yellowstone(){
+  source /etc/profile
+  module purge
+  module load ncarenv/1.0 ncarbinlibs/1.1 intel/15.0.0 ncarcompilers/1.0 netcdf/4.3.0 mkl/11.1.2 impi/4.0.3.008
+  export ESMFMKFILE=~theurich/ESMF-INSTALLS/700-Intel15.0.0-IMPI4.0.3.008-NetCDF4.3.0/lib/esmf.mk
+}
+
+# Generic Linux/GNU environment
+environment_linux_gnu(){
+  source /opt/Modules/3.2.9/init/sh
+  module purge
+  module load GCC/4.7.0/GCC GCC/4.7.0/openmpi/1.6.0-threadmultiple esmf/7.0.0
 }
 
