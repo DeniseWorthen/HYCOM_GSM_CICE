@@ -2,7 +2,7 @@
 #
 ## NEMS Application Builder file
 
-COMPONENTS=( HYCOM CICE )
+COMPONENTS=( HYCOM )
 
 # HYCOM
 HYCOM_SRCDIR=$ROOTDIR/HYCOM
