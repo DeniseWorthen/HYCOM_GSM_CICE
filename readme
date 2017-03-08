@@ -1,0 +1,19 @@
+*********************************************
+compiling code and running the coupled model:
+*********************************************
+
+Assume that your working directory is called work.
+
+svn co https://svnemc.ncep.noaa.gov/projects/nems/apps/HYCOM-GSM-CICE/trunk work
+
+compiling:
+cd work/HYCOM/config
+cp Global/Aintelrelo_nems_nuopc Aintelrelo_nuopc
+cd ../..
+NEMS/NEMSAppBuilder
+cp NEMS/exe/NEMS.x run_dir/NEMS/exe
+
+
+running the model:
+cd work/run_dir
+./NEMS/NEMSCompsetRun
