@@ -1,0 +1,12 @@
+#%Module######################################################################
+
+# This script is responsible for loading modules that are compatible with
+# the NUOPC Layer version used in NEMS.
+
+module load intel/14.0.2 impi/5.1.1.109 netcdf/4.3.0 szip 
+module use /scratch4/NCEPDEV/nems/save/Gerhard.Theurich/Modulefiles
+#module load esmf/7.0.0
+module load esmf/7.1.0bs05-IMPI5.1.1.109
+
+module use -a /scratch3/NCEPDEV/nwprod/lib/modulefiles
+module load jasper/v1.900.1
