@@ -1,12 +1,12 @@
 #! /bin/ksh --login
 
-#PBS -e /scratch3/NCEPDEV/stmp1/Bin.Li/rt_7259/cfsr%20150401_1day_nems_gsm%slg%T126_cice%0.24_hycom%0.24/err
-#PBS -o /scratch3/NCEPDEV/stmp1/Bin.Li/rt_7259/cfsr%20150401_1day_nems_gsm%slg%T126_cice%0.24_hycom%0.24/out
-#PBS -N rt_7259_1
+#PBS -e /scratch3/NCEPDEV/stmp1/Bin.Li/rt_53202/cfsr%20150401_5days_nems_gsm%slg%T126_cice%0.24_hycom%0.24/err
+#PBS -o /scratch3/NCEPDEV/stmp1/Bin.Li/rt_53202/cfsr%20150401_5days_nems_gsm%slg%T126_cice%0.24_hycom%0.24/out
+#PBS -N rt_53202_1
 #PBS -A omd
-#PBS -q debug
+#PBS -q batch
 #PBS -l procs=172
-#PBS -l walltime=00:30:00
+#PBS -l walltime=00:120:00
 #PBS -W umask=027
 
 set -aeux
@@ -19,7 +19,7 @@ export SCHEDULER=pbs
 
 export FIXGLOBAL=/scratch4/NCEPDEV/global/save/Shrinivas.Moorthi/para/fix/fix_am
 
-cd /scratch3/NCEPDEV/stmp1/Bin.Li/rt_7259/cfsr%20150401_1day_nems_gsm%slg%T126_cice%0.24_hycom%0.24
+cd /scratch3/NCEPDEV/stmp1/Bin.Li/rt_53202/cfsr%20150401_5days_nems_gsm%slg%T126_cice%0.24_hycom%0.24
 
 echo "Model started:  " `date`
 
@@ -29,7 +29,7 @@ echo "Model started:  " `date`
 
 export TASKSIZE=172
 
-/scratch3/NCEPDEV/stmp1/Bin.Li/rt_7259/cfsr%20150401_1day_nems_gsm%slg%T126_cice%0.24_hycom%0.24/gfs_fcst_run
+/scratch3/NCEPDEV/stmp1/Bin.Li/rt_53202/cfsr%20150401_5days_nems_gsm%slg%T126_cice%0.24_hycom%0.24/gfs_fcst_run
 
 echo "Model ended:    " `date`
 

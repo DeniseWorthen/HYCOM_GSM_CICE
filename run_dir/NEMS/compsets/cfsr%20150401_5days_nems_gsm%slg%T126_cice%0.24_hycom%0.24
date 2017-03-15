@@ -4,11 +4,11 @@
 # TEST   - GSM <-> Mediator <-> HYCOM0.24
 #        -    900s         1800s    coupling interval
 #        - Exchanging Fields
-#        - Starting at 2015040100, running for 1 hr
+#        - Starting at 2015040100, running for 5 days
 #
 ###############################################################################
 
-export TEST_DESCR="NUOPC: SLG GSM <-900s-> MED <-900s-> CICE <-900s-> MED <-1800s-> HYCOM0.24 ... 1 hr"
+export TEST_DESCR="NUOPC: SLG GSM <-900s-> MED <-900s-> CICE <-900s-> MED <-1800s-> HYCOM0.24 ... 5 days"
 
 # - NEMS configuration ---
 export NEMS_CASE=cfsr%20150401
@@ -16,12 +16,12 @@ export NEMS_GRID=gsm%slg%T126_mx2
 # - gsm configuration ---
 export_gsm
 export ACCNR=omd
-export QUEUE=debug
+export QUEUE=batch
 export TASKS=172
-export WLCLK=30
+export WLCLK=120
 export CDATE=2015040100
-#export NDAYS=1
-export NHRS=1
+export NDAYS=5
+#export NHRS=1
 export wave=126
 export lm=64
 export lsoil=4

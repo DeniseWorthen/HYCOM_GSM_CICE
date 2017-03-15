@@ -149,8 +149,8 @@ setup_med_nems(){
   echo "NEMSCompsetRun nemsgridinp = ${nemsgridinp}"
 #  cp -f ${DATADIR}/MED_NEMS/${nemsgrid}${nemsgridinp}/* ${RUNDIR}
 #  cp -f /scratch3/NCEPDEV/stmp1/Anthony.Craig/UGCS-Seasonal.r72808/20150401short_nemscold_gsm_cice_mom5/mediator*restart* ${RUNDIR}
-cp -f /scratch3/NCEPDEV/marine/save/Bin.Li/NEMS_INPUT/med_data/mx24/mediator*restart* ${RUNDIR}
-
+  MED_INPUT_DIR=/scratch3/NCEPDEV/marine/save/Bin.Li/NEMS_INPUT0.1/med_data/mx24
+  cp -f ${MED_INPUT_DIR}/mediator*restart* ${RUNDIR}
   echo  "...done."
 }
 
@@ -203,14 +203,14 @@ setup_hycom_Core2-0.72(){
 }
 setup_hycom024(){
   echo -n "setup_hycom0.24 ... "
-  ln -s /scratch3/NCEPDEV/marine/save/Bin.Li/hycom/data/forcing* ${RUNDIR}/.
-  ln -s /scratch3/NCEPDEV/marine/save/Bin.Li/hycom/data/iso.sigma* ${RUNDIR}/.
-  ln -s /scratch3/NCEPDEV/marine/save/Bin.Li/hycom/data/regional* ${RUNDIR}/.
-  ln -s /scratch3/NCEPDEV/marine/save/Bin.Li/hycom/data/relax* ${RUNDIR}/.
-  ln -s /scratch3/NCEPDEV/marine/save/Bin.Li/hycom/data/restart* ${RUNDIR}/.
-  ln -s /scratch3/NCEPDEV/marine/save/Bin.Li/hycom/data/tbaric* ${RUNDIR}/.
-  cp -f /scratch3/NCEPDEV/marine/save/Bin.Li/hycom/data/blkdat.input ${RUNDIR}/.
-  cp -f /scratch3/NCEPDEV/marine/save/Bin.Li/hycom/data/patch.input ${RUNDIR}/patch.input
+  ln -s /scratch3/NCEPDEV/marine/save/Bin.Li/NEMS_INPUT0.1/hycom_data/forcing* ${RUNDIR}/.
+  ln -s /scratch3/NCEPDEV/marine/save/Bin.Li/NEMS_INPUT0.1/hycom_data/iso.sigma* ${RUNDIR}/.
+  ln -s /scratch3/NCEPDEV/marine/save/Bin.Li/NEMS_INPUT0.1/hycom_data/regional* ${RUNDIR}/.
+  ln -s /scratch3/NCEPDEV/marine/save/Bin.Li/NEMS_INPUT0.1/hycom_data/relax* ${RUNDIR}/.
+  ln -s /scratch3/NCEPDEV/marine/save/Bin.Li/NEMS_INPUT0.1/hycom_data/restart* ${RUNDIR}/.
+  ln -s /scratch3/NCEPDEV/marine/save/Bin.Li/NEMS_INPUT0.1/hycom_data/tbaric* ${RUNDIR}/.
+  cp -f /scratch3/NCEPDEV/marine/save/Bin.Li/NEMS_INPUT0.1/hycom_data/blkdat.input ${RUNDIR}/.
+  cp -f /scratch3/NCEPDEV/marine/save/Bin.Li/NEMS_INPUT0.1/hycom_data/patch.input ${RUNDIR}/patch.input
   echo  "done."
 }
 
@@ -287,8 +287,8 @@ setup_cice024(){
   fi
   echo "NEMSCompsetRun icegrid = ${icegrid}"
   echo "NEMSCompsetRun ice inpversion = ${inpversion}"
-ICE_INPUT=/scratch3/NCEPDEV/marine/save/Bin.Li/NEMS_INPUT/cice_data_24
-dst_dir="${RUNDIR}"
+  ICE_INPUT=/scratch3/NCEPDEV/marine/save/Bin.Li/NEMS_INPUT0.1/cice_data_24
+  dst_dir="${RUNDIR}"
   cp -f ${ICE_INPUT}/grid_cice_NEMS_mx24.nc ${dst_dir}
   cp -f ${ICE_INPUT}/kmtu_cice_NEMS_mx24.nc ${dst_dir}
   cp -f ${ICE_INPUT}/ice_in24  ${dst_dir}/ice_in
@@ -688,7 +688,7 @@ elif [ $MACHINE_ID = theia ]; then
   # -
   cp $PATHRT/gfs_fcst_run.IN_Linux $PATHRT/gfs_fcst_run.IN
 #  export IC_DIR=$DATADIR/GSM_INITIAL_CONDITIONS_v002
- export IC_DIR=/scratch3/NCEPDEV/marine/save/Bin.Li/NEMS_INPUT/gsm_data_24/mx24
+ export IC_DIR=/scratch3/NCEPDEV/marine/save/Bin.Li/NEMS_INPUT0.1/gsm_data_24/mx24
   export RTPWD=$DATADIR/RT-Baselines
   export FIXGLOBAL=/scratch4/NCEPDEV/global/save/Shrinivas.Moorthi/para/fix/fix_am
 elif [ $MACHINE_ID = yellowstone ]; then
@@ -768,7 +768,7 @@ elif ([ $# == 2 ]); then
     compsets="$2"
     echo "Single compset: '$2'..."
     # default
-    compsetdir=$ROOTDIR
+    compsetdir=$ROOTDIR/NEMS/compsets
   else
     echo "Usage: ./NEMSCompsetRun [FILE]"
     echo "  Where FILE contains a list of compsets to be run, one compset per line."
