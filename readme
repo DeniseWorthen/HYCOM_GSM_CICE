@@ -7,13 +7,24 @@ Assume that your working directory is called work.
 svn co https://svnemc.ncep.noaa.gov/projects/nems/apps/HYCOM-GSM-CICE/trunk work
 
 compiling:
+method 1:
 cd work/HYCOM/config
 cp Global/Aintelrelo_nems_nuopc Aintelrelo_nuopc
 cd ../..
-NEMS/NEMSAppBuilder
+./NEMS/NEMSAppBuilder
+select <YES> when the third window (called Build enveironment) appears.
 cp NEMS/exe/NEMS.x run_dir/NEMS/exe
 
+method 2:
+cd work/HYCOM/config
+cp Global/Aintelrelo_nems_nuopc Aintelrelo_nuopc
+cd ../..
+load all modules shown in file "modulefiles/theia/ESMF_NUOPC".
+./NEMS/NEMSAppBuilder
+select <NO> when the third window (called Build enveironment) appears.
+cp NEMS/exe/NEMS.x run_dir/NEMS/exe
 
+------------------------------------------------------------
 running the model:
 cd work/run_dir
 ./NEMS/NEMSCompsetRun
