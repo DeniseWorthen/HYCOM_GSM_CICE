@@ -3,8 +3,8 @@
 set -x
 #
 #
-if [[ -e  /scratch3/NCEPDEV/stmp1/Bin.Li/work2/work2/run_dir/NEMS/src/conf/modules.nems ]]; then
-  source /scratch3/NCEPDEV/stmp1/Bin.Li/work2/work2/run_dir/NEMS/src/conf/modules.nems
+if [[ -e  /scratch3/NCEPDEV/stmp1/Bin.Li/work1/work/run_dir/NEMS/src/conf/modules.nems ]]; then
+  source /scratch3/NCEPDEV/stmp1/Bin.Li/work1/work/run_dir/NEMS/src/conf/modules.nems
   module list
 fi
 
@@ -249,7 +249,7 @@ export MP_COREFILE_FORMAT=lite
 #
 #    Set up experiment and directory names
 #
-export expt=/scratch3/NCEPDEV/stmp1/Bin.Li/rt_53202/cfsr%20150401_5days_nems_gsm%slg%T126_cice%0.24_hycom%0.24
+export expt=/scratch3/NCEPDEV/stmp1/Bin.Li/rt_99420/cfsr%20150401_1day_nems_gsm%slg%T126_cice%0.24_hycom%0.24
  
 #
 export NSCDIR=/global/noscrub
@@ -283,7 +283,7 @@ fi
 #    needs to be specified. ndays is the Length of #orecast in days
 #    begining from nhourb
 #
-NDAYS=5
+NDAYS=1
 ndays=${NDAYS:-0}
 NHRS=
 #BL
@@ -386,7 +386,7 @@ fi
 #
 #     Forecast script and executable name
 #
-srcdir=/scratch3/NCEPDEV/stmp1/Bin.Li/work2/work2/run_dir/NEMS
+srcdir=/scratch3/NCEPDEV/stmp1/Bin.Li/work1/work/run_dir/NEMS
 export FCSTSCRIPT=$srcdir/tests/exglobal_fcst_nems.sh
 export FCSTEXEC=$srcdir/exe/NEMS.x
 

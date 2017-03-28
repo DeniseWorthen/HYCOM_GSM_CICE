@@ -1,12 +1,18 @@
-*********************************************
+**********************************************************************
 compiling code and running the coupled model:
-*********************************************
+**********************************************************************
+Please add the following lines to your .cshrc file in your home directory:
 
+limit stacksize unlimited
+setenv LD_LIBRARY_PATH ${LD_LIBRARY_PATH}:/scratch4/NCEPDEV/nems/save/Gerhard.Theurich/ESMF-INSTALLS/710bs05-Intel14.0.2-IMPI5.1.1.109-NetCDF4.3.0/lib
+
+----------------------------------------------------------------------
 Assume that your working directory is called work.
 
+a) Getting the code:
 svn co https://svnemc.ncep.noaa.gov/projects/nems/apps/HYCOM-GSM-CICE/trunk work
 
-compiling:
+b) Compiling the code:
 method 1:
 cd work/HYCOM/config
 cp Global/Aintelrelo_nems_nuopc Aintelrelo_nuopc
@@ -25,6 +31,9 @@ select <NO> when the third window (called Build enveironment) appears.
 cp NEMS/exe/NEMS.x run_dir/NEMS/exe
 
 ------------------------------------------------------------
-running the model:
-cd work/run_dir
+c) Running the model:
+cd work/run_dir/NEMS/compsets
+If your ACCNR (your account) is not omd, edit the compsets to set your ACCNR.
+cd ../..
+Specify the compset that you want to run in "HYCOM-GSM-CICE.compsetRun".
 ./NEMS/NEMSCompsetRun

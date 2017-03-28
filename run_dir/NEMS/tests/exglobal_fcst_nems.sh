@@ -463,7 +463,7 @@ elif [ $machine = THEIA ]; then
   export MKL_NUM_THREADS=${MKL_NUM_THREADS:-1}
 . /apps/lmod/5.8/init/ksh
   module load intel/14.0.2
-  module load  impi/4.1.3.048
+  module load  impi/5.1.1.109
 elif [ $machine = GAEA ]; then
   export MPICH_FAST_MEMCPY=${MPICH_FAST_MEMCPY:-"ENABLE"}
   export MPICH_MAX_SHORT_MSG_SIZE=${MPICH_MAX_SHORT_MSG_SIZE:-4096}

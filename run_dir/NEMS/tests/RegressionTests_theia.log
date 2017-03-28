@@ -1,7 +1,7 @@
 Starting :
-Tue Mar 14 12:16:07 UTC 2017
+Tue Mar 28 09:51:50 UTC 2017
 ======================================================================
-Setting up to run NEMS on compset: 'cfsr%20150401_5days_nems_gsm%slg%T126_cice%0.24_hycom%0.24'.
-RUNDIR: '/scratch3/NCEPDEV/stmp1/Bin.Li/rt_53202/cfsr%20150401_5days_nems_gsm%slg%T126_cice%0.24_hycom%0.24'.
+Setting up to run NEMS on compset: 'cfsr%20150401_1day_nems_gsm%slg%T126_cice%0.24_hycom%0.24'.
+RUNDIR: '/scratch3/NCEPDEV/stmp1/Bin.Li/rt_99420/cfsr%20150401_1day_nems_gsm%slg%T126_cice%0.24_hycom%0.24'.
 ======================================================================
-Tue Mar 14 12:16:17 UTC 2017
+Tue Mar 28 09:52:13 UTC 2017
