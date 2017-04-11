@@ -131,17 +131,17 @@ fi
 
 setup_med_nems(){
   echo "setup_med_nems ... "
-  nemsgrid="nx1"
-  nemsgridinp=""
+  nemsgrid="mx2"
+  nemsgridinp="C"
+  gsmgrid1="0.1"
+  gsmgrid2=""
   echo "NEMS_GRID = $NEMS_GRID"
   if [ -n "$NEMS_GRID" ] ; then
-    if [[ $NEMS_GRID = *nx1* ]] ; then
-      nemsgrid="nx1"
+    if [[ $NEMS_GRID = *574* ]] ; then
+      gsmgrid1="574"
+      gsmgrid2="A"
     elif [[ $NEMS_GRID = *mx2* ]] ; then
       nemsgrid="mx2"
-      nemsgridinp="C"
-    elif [[ $NEMS_GRID = *mx5* ]] ; then
-      nemsgrid="mx5"
       nemsgridinp="C"
     fi
   fi
@@ -149,7 +149,7 @@ setup_med_nems(){
   echo "NEMSCompsetRun nemsgridinp = ${nemsgridinp}"
 #  cp -f ${DATADIR}/MED_NEMS/${nemsgrid}${nemsgridinp}/* ${RUNDIR}
 #  cp -f /scratch3/NCEPDEV/stmp1/Anthony.Craig/UGCS-Seasonal.r72808/20150401short_nemscold_gsm_cice_mom5/mediator*restart* ${RUNDIR}
-  MED_INPUT_DIR=/scratch3/NCEPDEV/marine/save/Bin.Li/NEMS_INPUT0.1/med_data/mx24
+  MED_INPUT_DIR=/scratch3/NCEPDEV/marine/save/Bin.Li/NEMS_INPUT${gsmgrid1}${gsmgrid2}/med_data/mx24
   cp -f ${MED_INPUT_DIR}/mediator*restart* ${RUNDIR}
   echo  "...done."
 }
@@ -203,14 +203,23 @@ setup_hycom_Core2-0.72(){
 }
 setup_hycom024(){
   echo -n "setup_hycom0.24 ... "
-  ln -s /scratch3/NCEPDEV/marine/save/Bin.Li/NEMS_INPUT0.1/hycom_data/forcing* ${RUNDIR}/.
-  ln -s /scratch3/NCEPDEV/marine/save/Bin.Li/NEMS_INPUT0.1/hycom_data/iso.sigma* ${RUNDIR}/.
-  ln -s /scratch3/NCEPDEV/marine/save/Bin.Li/NEMS_INPUT0.1/hycom_data/regional* ${RUNDIR}/.
-  ln -s /scratch3/NCEPDEV/marine/save/Bin.Li/NEMS_INPUT0.1/hycom_data/relax* ${RUNDIR}/.
-  ln -s /scratch3/NCEPDEV/marine/save/Bin.Li/NEMS_INPUT0.1/hycom_data/restart* ${RUNDIR}/.
-  ln -s /scratch3/NCEPDEV/marine/save/Bin.Li/NEMS_INPUT0.1/hycom_data/tbaric* ${RUNDIR}/.
-  cp -f /scratch3/NCEPDEV/marine/save/Bin.Li/NEMS_INPUT0.1/hycom_data/blkdat.input ${RUNDIR}/.
-  cp -f /scratch3/NCEPDEV/marine/save/Bin.Li/NEMS_INPUT0.1/hycom_data/patch.input ${RUNDIR}/patch.input
+  gsmgrid1="0.1"
+  gsmgrid2=""
+  echo "NEMS_GRID = $NEMS_GRID"
+  if [ -n "$NEMS_GRID" ] ; then
+    if [[ $NEMS_GRID = *574* ]] ; then
+      gsmgrid1="574"
+      gsmgrid2="A"
+    fi
+  fi
+  ln -s /scratch3/NCEPDEV/marine/save/Bin.Li/NEMS_INPUT${gsmgrid1}${gsmgrid2}/hycom_data/forcing* ${RUNDIR}/.
+  ln -s /scratch3/NCEPDEV/marine/save/Bin.Li/NEMS_INPUT${gsmgrid1}${gsmgrid2}/hycom_data/iso.sigma* ${RUNDIR}/.
+  ln -s /scratch3/NCEPDEV/marine/save/Bin.Li/NEMS_INPUT${gsmgrid1}${gsmgrid2}/hycom_data/regional* ${RUNDIR}/.
+  ln -s /scratch3/NCEPDEV/marine/save/Bin.Li/NEMS_INPUT${gsmgrid1}${gsmgrid2}/hycom_data/relax* ${RUNDIR}/.
+  ln -s /scratch3/NCEPDEV/marine/save/Bin.Li/NEMS_INPUT${gsmgrid1}${gsmgrid2}/hycom_data/restart* ${RUNDIR}/.
+  ln -s /scratch3/NCEPDEV/marine/save/Bin.Li/NEMS_INPUT${gsmgrid1}${gsmgrid2}/hycom_data/tbaric* ${RUNDIR}/.
+  cp -f /scratch3/NCEPDEV/marine/save/Bin.Li/NEMS_INPUT${gsmgrid1}${gsmgrid2}/hycom_data/blkdat.input ${RUNDIR}/.
+  cp -f /scratch3/NCEPDEV/marine/save/Bin.Li/NEMS_INPUT${gsmgrid1}${gsmgrid2}/hycom_data/patch.input ${RUNDIR}/patch.input
   echo  "done."
 }
 
@@ -285,13 +294,23 @@ setup_cice024(){
       inpversion="B"
     fi
   fi
+  gsmgrid1="0.1"
+  gsmgrid2=""
+  if [ -n "$NEMS_GRID" ] ; then
+    if [[ $NEMS_GRID = *574* ]] ; then
+      gsmgrid1="574"
+      gsmgrid2="A"
+    fi
+  fi
+
   echo "NEMSCompsetRun icegrid = ${icegrid}"
   echo "NEMSCompsetRun ice inpversion = ${inpversion}"
-  ICE_INPUT=/scratch3/NCEPDEV/marine/save/Bin.Li/NEMS_INPUT0.1/cice_data_24
+#  ICE_INPUT=/scratch3/NCEPDEV/marine/save/Bin.Li/NEMS_INPUT0.1/cice_data_24
+  ICE_INPUT=/scratch3/NCEPDEV/marine/save/Bin.Li/NEMS_INPUT${gsmgrid1}${gsmgrid2}/cice_data_24
   dst_dir="${RUNDIR}"
   cp -f ${ICE_INPUT}/grid_cice_NEMS_mx24.nc ${dst_dir}
   cp -f ${ICE_INPUT}/kmtu_cice_NEMS_mx24.nc ${dst_dir}
-  cp -f ${ICE_INPUT}/ice_in24  ${dst_dir}/ice_in
+  cp -f ${ICE_INPUT}/ice_in  ${dst_dir}/ice_in
   ln -s ${ICE_INPUT}/cice5_model.res.nc   ${dst_dir}/
 # PT for 900s ice timestep and additional output.
   mkdir ${dst_dir}/restart
@@ -633,6 +652,7 @@ if [ $MACHINE_ID = wcoss ]; then
   source /usrx/local/Modules/default/init/sh
   export DATADIR=/climate/noscrub/emc.climpara/NEMS-Data
 
+
   # export QUEUE=debug
   # export QUEUE=dev
   export QUEUE=devhigh
@@ -674,21 +694,18 @@ elif [ $MACHINE_ID = theia ]; then
   export DATADIR=/scratch4/NCEPDEV/nems/noscrub/NEMS-Data
   export ACCNR
   export QUEUE
- # export ACCNR=omd
- #export QUEUE=batch
- # export QUEUE=debug
   export STMP=/scratch3/NCEPDEV/stmp1
   export PTMP=/scratch3/NCEPDEV/stmp1
-  # export STMP=/scratch3/NCEPDEV/swpc/scrub
-  # export PTMP=/scratch3/NCEPDEV/swpc/scrub
   export SCHEDULER=pbs
   export MPIEXEC=mpirun
   export SIGHDR=/scratch4/NCEPDEV/global/save/Shrinivas.Moorthi/para/sorc/global_sighdr.fd/global_sighdr
-  export SLG=.false.
+#  export SLG=.false.
+  export SLG=.true.
   # -
   cp $PATHRT/gfs_fcst_run.IN_Linux $PATHRT/gfs_fcst_run.IN
 #  export IC_DIR=$DATADIR/GSM_INITIAL_CONDITIONS_v002
- export IC_DIR=/scratch3/NCEPDEV/marine/save/Bin.Li/NEMS_INPUT0.1/gsm_data_24/mx24
+# export IC_DIR=/scratch3/NCEPDEV/marine/save/Bin.Li/NEMS_INPUT${gsmgrid1}${gsmgrid2}/gsm_data_24/mx24
+# export IC_DIR=/scratch3/NCEPDEV/marine/save/Bin.Li/NEMS_INPUT574A/gsm_data_24/mx24
   export RTPWD=$DATADIR/RT-Baselines
   export FIXGLOBAL=/scratch4/NCEPDEV/global/save/Shrinivas.Moorthi/para/fix/fix_am
 elif [ $MACHINE_ID = yellowstone ]; then

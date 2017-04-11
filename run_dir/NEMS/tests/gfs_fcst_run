@@ -3,8 +3,8 @@
 set -x
 #
 #
-if [[ -e  /scratch3/NCEPDEV/stmp1/Bin.Li/work1/work/run_dir/NEMS/src/conf/modules.nems ]]; then
-  source /scratch3/NCEPDEV/stmp1/Bin.Li/work1/work/run_dir/NEMS/src/conf/modules.nems
+if [[ -e  /scratch3/NCEPDEV/marine/noscrub/Bin.Li/nems/work/work/run_dir/NEMS/src/conf/modules.nems ]]; then
+  source /scratch3/NCEPDEV/marine/noscrub/Bin.Li/nems/work/work/run_dir/NEMS/src/conf/modules.nems
   module list
 fi
 
@@ -16,7 +16,7 @@ fi
 #
 #    Set up horizontal and vertical resolution ; default will be T6264
 #
- export wave=126 ; export lm=64 ; export lsoil=4
+ export wave=574 ; export lm=64 ; export lsoil=4
 
 #**************************************************************
 #
@@ -223,8 +223,8 @@ fi
 #
  export ENS_NUM=1
 #
-#tasks=172  
- export PE1=172  
+#tasks=268  
+ export PE1=268  
 
  export MEMBER_NAMES=c00
 
@@ -249,7 +249,7 @@ export MP_COREFILE_FORMAT=lite
 #
 #    Set up experiment and directory names
 #
-export expt=/scratch3/NCEPDEV/stmp1/Bin.Li/rt_99420/cfsr%20150401_1day_nems_gsm%slg%T126_cice%0.24_hycom%0.24
+export expt=/scratch3/NCEPDEV/stmp1/Bin.Li/rt_106211/cfsr%20150401_1day_nems_gsm%slg%T574_cice%0.24_hycom%0.24
  
 #
 export NSCDIR=/global/noscrub
@@ -386,7 +386,7 @@ fi
 #
 #     Forecast script and executable name
 #
-srcdir=/scratch3/NCEPDEV/stmp1/Bin.Li/work1/work/run_dir/NEMS
+srcdir=/scratch3/NCEPDEV/marine/noscrub/Bin.Li/nems/work/work/run_dir/NEMS
 export FCSTSCRIPT=$srcdir/tests/exglobal_fcst_nems.sh
 export FCSTEXEC=$srcdir/exe/NEMS.x
 
@@ -405,7 +405,7 @@ cd $RUNDIR
 #
 if [ $SCHEDULER = 'moab' ]; then
    export FIXGLOBAL=${FIXGLOBAL:-/lustre/f1/unswept/ncep/Shrinivas.Moorthi/para/fix/fix_am}
-   export FCST_LAUNCHER='aprun -n 172'
+   export FCST_LAUNCHER='aprun -n 268'
 elif [ $SCHEDULER = 'pbs' ]; then
   if [ $MACHINE_ID = 'theia' ]; then
     export FIXGLOBAL=/scratch4/NCEPDEV/global/save/Shrinivas.Moorthi/para/fix/fix_am
@@ -444,11 +444,17 @@ fi
  export POSTGPDIR=$TOPDIR/wx23hh/00wkgfs/src/global_postgp.fd
  export POSTGPEXEC=$POSTGPDIR/global_postgp
  export POSTGPSH=/nwprod/ush/global_postgp.sh
-
+   if [ $wave -eq 126 ] ; then
  export MTNVAR=/scratch3/NCEPDEV/marine/save/Bin.Li/NEMS_INPUT0.1/gsm_data_24/terr07_126.384.190/ml126/global_mtnvar.t126.384.190.f77
  export OROGRAPHY_UF=/scratch3/NCEPDEV/marine/save/Bin.Li/NEMS_INPUT0.1/gsm_data_24/terr07_126.384.190/ml126/global_orography_uf.t126.384.190.grb
  export OROGRAPHY=/scratch3/NCEPDEV/marine/save/Bin.Li/NEMS_INPUT0.1/gsm_data_24/terr07_126.384.190/ml126/global_orography.t126.384.190.grb
-
+   fi
+   if [ $wave -eq 574 ] ; then
+# export IC_DIR=/scratch3/NCEPDEV/marine/save/Bin.Li/NEMS_INPUT574A/gsm_data_24/mx24
+ export MTNVAR=/scratch3/NCEPDEV/marine/save/Bin.Li/NEMS_INPUT574A/gsm_data_24/terr07_574.1152.576/ml574/global_mtnvar.t574.1152.576.f77
+ export OROGRAPHY_UF=/scratch3/NCEPDEV/marine/save/Bin.Li/NEMS_INPUT574A/gsm_data_24/terr07_574.1152.576/ml574/global_orography_uf.t574.1152.576.grb
+ export OROGRAPHY=/scratch3/NCEPDEV/marine/save/Bin.Li/NEMS_INPUT574A/gsm_data_24/terr07_574.1152.576/ml574/global_orography.t574.1152.576.grb
+   fi
 # export OROGRAPHY_UF=${OROGRAPHY_UF:-${FIXGLOBAL}/global_orography_uf.t${wave}.${LONR}.${LATR}.grb}
 #
 #

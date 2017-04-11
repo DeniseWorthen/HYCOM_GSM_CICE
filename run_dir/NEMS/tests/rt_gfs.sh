@@ -238,6 +238,7 @@ fi
      export nemsioget=${nemsioget:-/scratch3/NCEPDEV/nems/save/Jun.Wang/nems/util/nemsio_get}
   fi
   export SIGHDR=$nemsioget
+  echo "IC_DIR=" $IC_DIR
   if [ $fcst_begin = YES ]; then
     cp $IC_DIR/gfsanl.$CDATE $RUNDIR
     cp $IC_DIR/sfnanl.$CDATE $RUNDIR

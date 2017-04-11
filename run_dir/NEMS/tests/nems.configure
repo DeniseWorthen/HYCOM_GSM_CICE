@@ -10,7 +10,7 @@ EARTH_attributes::
 
 # MED #
 MED_model:                      nems
-MED_petlist_bounds:             0 71
+MED_petlist_bounds:             0 143
 MED_attributes::
   Verbosity = 1
   DumpFields = false
@@ -21,7 +21,7 @@ MED_attributes::
 
 # ATM #
 ATM_model:                      gsm
-ATM_petlist_bounds:             0 47
+ATM_petlist_bounds:             0 143
 ATM_attributes::
   Verbosity = max
   DumpFields = false
@@ -29,7 +29,7 @@ ATM_attributes::
 
 # OCN #
 OCN_model:                      hycom
-OCN_petlist_bounds:             72 171
+OCN_petlist_bounds:             168 267
 OCN_attributes::
   Verbosity = max
   DumpFields = false
@@ -38,7 +38,7 @@ OCN_attributes::
 
 # ICE #
 ICE_model:                      cice
-ICE_petlist_bounds:             48 71
+ICE_petlist_bounds:             144 167
 ICE_attributes::
   Verbosity = max
   DumpFields = false

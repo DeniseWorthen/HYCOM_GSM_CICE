@@ -15,7 +15,8 @@ export NEMS_CASE=cfsr%20150401
 export NEMS_GRID=gsm%slg%T126_mx2
 # - gsm configuration ---
 export_gsm
-export ACCNR=omd
+export IC_DIR=/scratch3/NCEPDEV/marine/save/Bin.Li/NEMS_INPUT0.1/gsm_data_24/mx24
+export ACCNR=marine-cpu
 export QUEUE=debug
 export TASKS=172
 export WLCLK=30

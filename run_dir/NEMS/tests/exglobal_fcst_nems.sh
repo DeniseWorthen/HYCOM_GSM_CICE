@@ -1782,10 +1782,10 @@ $ERRSCRIPT||exit 2
 
 rm -f NULL
 rm -f fort.11 fort.12 fort.14
-rm -f fort.15 fort.27 fort.28 fort.29 fort.43 fort.48
-#rm -f fort.15 fort.24 fort.27 fort.28 fort.29 fort.43 fort.48
-#rm -f orography
-#rm -f orography_uf
+#rm -f fort.15 fort.27 fort.28 fort.29 fort.43 fort.48
+rm -f fort.15 fort.24 fort.27 fort.28 fort.29 fort.43 fort.48
+rm -f orography
+rm -f orography_uf
 rm -f fort.51 fort.52 fort.53
 #rm -f SIG.F* SFC.F* FLX.F* LOG.F* D3D.F AER.F*
 ##rm -f sigr1 sigr2 sfcr

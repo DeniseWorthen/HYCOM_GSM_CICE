@@ -444,11 +444,17 @@ fi
  export POSTGPDIR=$TOPDIR/wx23hh/00wkgfs/src/global_postgp.fd
  export POSTGPEXEC=$POSTGPDIR/global_postgp
  export POSTGPSH=/nwprod/ush/global_postgp.sh
-
+   if [ $wave -eq 126 ] ; then
  export MTNVAR=/scratch3/NCEPDEV/marine/save/Bin.Li/NEMS_INPUT0.1/gsm_data_24/terr07_126.384.190/ml126/global_mtnvar.t126.384.190.f77
  export OROGRAPHY_UF=/scratch3/NCEPDEV/marine/save/Bin.Li/NEMS_INPUT0.1/gsm_data_24/terr07_126.384.190/ml126/global_orography_uf.t126.384.190.grb
  export OROGRAPHY=/scratch3/NCEPDEV/marine/save/Bin.Li/NEMS_INPUT0.1/gsm_data_24/terr07_126.384.190/ml126/global_orography.t126.384.190.grb
-
+   fi
+   if [ $wave -eq 574 ] ; then
+# export IC_DIR=/scratch3/NCEPDEV/marine/save/Bin.Li/NEMS_INPUT574A/gsm_data_24/mx24
+ export MTNVAR=/scratch3/NCEPDEV/marine/save/Bin.Li/NEMS_INPUT574A/gsm_data_24/terr07_574.1152.576/ml574/global_mtnvar.t574.1152.576.f77
+ export OROGRAPHY_UF=/scratch3/NCEPDEV/marine/save/Bin.Li/NEMS_INPUT574A/gsm_data_24/terr07_574.1152.576/ml574/global_orography_uf.t574.1152.576.grb
+ export OROGRAPHY=/scratch3/NCEPDEV/marine/save/Bin.Li/NEMS_INPUT574A/gsm_data_24/terr07_574.1152.576/ml574/global_orography.t574.1152.576.grb
+   fi
 # export OROGRAPHY_UF=${OROGRAPHY_UF:-${FIXGLOBAL}/global_orography_uf.t${wave}.${LONR}.${LATR}.grb}
 #
 #
