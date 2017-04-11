@@ -33,7 +33,7 @@ cp NEMS/exe/NEMS.x run_dir/NEMS/exe
 ------------------------------------------------------------
 c) Running the model:
 cd work/run_dir/NEMS/compsets
-If your ACCNR (your account) is not omd, edit the compsets to set your ACCNR.
+If your ACCNR (your account) is not "marine-cpu", edit the compsets to set your ACCNR.
 cd ../..
 Specify the compset that you want to run in "HYCOM-GSM-CICE.compsetRun".
 ./NEMS/NEMSCompsetRun
