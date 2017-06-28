@@ -36,3 +36,21 @@ Specify the compset that you want to run in "HYCOM-GSM-CICE.compsetRun".
 ./NEMS/NEMSCompsetRun
 
 The model output directory is located at /scratch3/NCEPDEV/stmp1/Your_first_name.Your_last_name.
+
+
+ESMF Tracing
+------------------------------------------------------------
+To activate ESMF tracing for timing the application, edit the file:
+run_dir/NEMS/tests/exglobal_fcst_nems.sh
+
+and uncomment the lines:
+#export ESMF_RUNTIME_TRACE=ON                                                                                                
+#export ESMF_RUNTIME_TRACE_PETLIST="0 144 168"   
+
+The ESMF_RUNTIME_TRACE_PETLIST environment variable should be
+set to the set of PETs to trace.  It is recommended to only trace
+the root PET of each component (to reduce size of trace).
+
+The trace will appear in the "traceout" directory of the run
+directory.  Information about analyzing the trace is available at:
+http://cupid.readthedocs.io/en/latest/runtime.html
