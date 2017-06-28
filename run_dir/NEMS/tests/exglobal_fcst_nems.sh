@@ -442,7 +442,13 @@ if [[ $VERBOSE = YES ]] ; then
 fi
 
 export COMPLIANCECHECK=${COMPLIANCECHECK:-OFF}
-export ESMF_RUNTIME_COMPLIANCECHECK=$COMPLIANCECHECK:depth=4
+export ESMF_RUNTIME_COMPLIANCECHECK=$COMPLIANCECHECK:depth=6:TEXT=OFF
+
+# uncomment to enable ESMF tracing
+# it is recommended to trace the root PET of each component
+#export ESMF_RUNTIME_TRACE=ON
+#export ESMF_RUNTIME_TRACE_PETLIST="0 144 168"
+
 #
 export machine=${machine:-WCOSS}
 export machine=$(echo $machine|tr '[a-z]' '[A-Z]')
