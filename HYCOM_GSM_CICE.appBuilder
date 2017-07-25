@@ -1,6 +1,6 @@
-# Climate Forecast System
+# HYCOM_GSM_CICE
 #
-## CFSv3 Application Builder file
+## Application Builder file
 
 COMPONENTS=( CICE HYCOM GSM )
 
@@ -25,8 +25,7 @@ case "$FULL_MACHINE_ID" in
         CHOSEN_MODULE=$FULL_MACHINE_ID/ESMF_NUOPC
         ;;
     wcoss*|theia)
-        CHOSEN_MODULE=$FULL_MACHINE_ID/ESMF_NUOPC
+        CHOSEN_MODULE=$FULL_MACHINE_ID/ESMF_710_gsm
         CONFOPT="coupled_intel_${MACHINE_ID:?}"
         ;;
 esac
-
