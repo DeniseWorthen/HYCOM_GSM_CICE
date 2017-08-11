@@ -1,0 +1,552 @@
+## Define a function that runs the exglobal_fcst script:
+embed bash run_exglobal_fcst(
+
+    # The line below ensures all function arguments are exported to
+    # the environment in exglobal_fcst instead of being script-local.
+
+    export.vars=1  # request export of all below variables
+                   # instead of just setting shell locals
+
+    NTHREADS,  # Mandatory argument: number of threads
+    TASKS,     # Mandatory argument: number of MPI ranks
+    RUNDIR,    # Mandatory argument: work area
+    IC_DIR,    # Mandatory argument: directory with gsm input conditions
+
+    # Path to the exglobal_fcst.sh script:
+    exglobal_fcst.sh="@[plat%HOMEnems]/compsets/exglobal_fcst.sh"
+
+    FCST_SCRIPT_DIR="@[plat%SCRIPTnems]"
+
+    # For production filename structure, set RUN_NAME:
+    RUN_NAME=''  # for example, "ngac" or "gfs"
+
+    # config file name within COMPSETS dir to source for additional
+    # settings:
+    CONFIG='gsm_config'
+
+    PARM="@[plat%PARMnems]"
+
+    # chem input dir when gocart is enabled:
+    PARM_NGAC="@[plat%PARM_NGAC]"
+
+    # Executables:
+    SIGHDR="@[plat%sighdr_path]"
+    nemsioget="@[plat%nemsioget]"
+
+    # Directories.  These assume the user wants the defaults set in
+    # the "platforms.default" block of platforms.input.
+    FIX_LANDSFC="@[plat%FIX_LANDSFC]"
+    FIX_LANDSFC_GAYNO="@[plat%FIX_LANDSFC_GAYNO]"
+    FIX_RAD="@[plat%FIX_RAD]"
+    FIXGLOBAL="@[plat%FIXGLOBAL]"
+    FIX_NGAC="@[plat%FIX_NGAC]"
+    DATA_IDEA="@[plat%DATA_IDEA]"
+    DATA_POST="@[plat%DATA_POST]"
+
+    FNSOTC="@[plat%FIX_LANDSFC_GAYNO]/global_soiltype.1x1.grb"
+
+    #--------------------------------------------------
+    # In the old scripts, these were never used or hard-coded elsewhere.
+
+    IEMS='0' # Never used
+    ISOL=''
+    SPPT_SFCLIMIT='.true. ' # never used
+
+    #--------------------------------------------------
+    # Optional arguments
+
+    # NOTE: 
+    #   [unused]   -   indicates exglobal_fcst.sh does not use it
+
+    nems_configure='medcold_atm_ocn_ice'
+    atm_model='gsm'
+
+    # From default_vars.sh
+    GEFS_ENSEMBLE='0'
+    GEN_ENSEMBLE='0'
+    WRITE_DOPOST='.false.'
+    POST_GRIBVERSION='grib1'
+
+    NHRS='48'
+    grid_aldata='.false.'   #  Same as CP2
+    FHRES='1440'
+    # WRTPE_PER_GROUP='3'
+    WRTPE_PER_GROUP='1'
+    FHDFI=''
+    ADIABATIC='.false.'
+    REDUCED_GRID='.true.'
+    # FHZER='6'
+    FHZER='1'
+    wave='62'
+    lm='64'
+    lsoil='4'
+    MEMBER_NAMES='c00'
+    IDVC='2'
+    THERMODYN_ID='1'
+    SFCPRESS_ID='1'
+    SPECTRAL_LOOP='2'
+    NEMSIO_IN='.false.'
+    NEMSIO_OUT='.false.'
+    rungfstest='.true.'
+    SIGIO_IN='.true.'
+    SIGIO_OUT='.true.'
+    SFCIO_OUT='.true.'
+    FHSWR='3600'
+    FHLWR='3600'
+    LDFI_SPECT='.true.'  # [unused] note: was not exported in default_vars.sh
+    CDATE='2012010100'
+    NST_FCST='0'
+    NDSLFV='.false.'
+    IDEA='.false.'
+    semilag='.false.'
+    A2OI_OUT='.false.'
+    NGRID_A2OI='48'
+
+    # From run.sh
+    print_esmf='.true.'
+
+    # From rt_gfs.sh
+
+    IALB='0'            # [unused] - commented out in exglobal_fcst.sh
+    isot='0'            # [unused]
+    ivegsrc='2'         # [unused]
+    FHOUT_HF='1'
+    FHMAX_HF='0'
+    PASSIVE_TRACER=''
+
+    WAM_IPE_COUPLING='.false.'
+    HEIGHT_DEPENDENT_G='.false.'
+    F107_KP_DATA_SIZE=''
+
+    # From gfs_fcst_run
+
+    EXPLICIT='.false.'
+    NST_SPINUP='0'
+    NST_RESERVED='0'
+    ZSEA1='0'
+    ZSEA2='0'
+    nst_anl='.false.'
+    F107_KP_SIZE=''
+    F107_KP_INTERVAL=''
+    F107_KP_SKIP_SIZE=''
+    DELTIM=''
+    CPLFLX='.false.'
+    GOCART='0'          # gocart_aerosol=YES === GOCART=1
+    IDEA='.false.'
+    fcst_begin='YES'
+
+    FHROT=''
+
+    liope='.false.'     # [UNUSED]
+    cold_sfc='NO'       # [UNUSED]
+    # NOTE: "hybrid" is defined and never copied to correct var "HYBRID"
+
+    FHOUT='3'           # hard-coded in gfs_fcst_run
+    FHZER='6'           # hard-coded in gfs_fcst_run
+
+    NTRAC=3
+    NTOZ=2
+    NTCW=3
+    NCLD=1
+    NTIW=0
+    NTKE=0
+    NTLNC=0
+    NTINC=0
+    NTO=0
+    NTO2=0
+    NMTVR=14
+
+    lsm=1               # [UNUSED]
+
+    LDFIFLTO=''   # hard-coded in gfs_fcst_run
+
+
+    ### From exglobal_fcst - empty to allow passing.  These are
+    ### copied from various ${whatever:-stuff} exports in exglobal_fcst.
+
+    dtphys=''
+
+    # stochastic physics
+    skeb_import=''
+    sppt_import=''
+    shum_import=''
+    skeb_export=''
+    sppt_export=''
+    shum_export=''
+    vc_import=''
+    vc_export=''
+
+    # "additional namelist parameters for stochastic physics.  Default
+    # is off" - exglobal_fcst
+    SPPT=''
+    ISEED_SPPT=''
+    SPPT_LOGIT=''
+    SPPT_LOGIT=''
+    SPPT_TAU=''
+    SPPT_LSCALE=''
+
+    SHUM=''
+    ISEED_SHUM=''
+    SHUM_TAU=''
+    SHUM_LSCALE=''
+
+    SKEB=''
+    ISEED_SKEB=''
+    SKEB_TAU=''
+    SKEB_LSCALE=''
+    SKEB_VFILT=''
+    SKEB_DISS_SMOOTH=''
+
+    VC=''
+    ISEED_VC=''
+    VCAMP=''
+    VC_TAU=''
+    VC_LSCALE=''
+
+    ##
+
+    QUILTING='.false.'
+    WRT_GROUP=''
+    GOCART_AER2POST=''
+
+    POSTGPVARS=''
+
+    HYBRID=''
+
+    NCP='cp'
+    restart_ndays=1
+
+    ntrc='3'
+    varid='21'
+    numcld='1'
+    fmax=""
+    fout="3"
+    fzer="6"
+    fcyc=''
+
+    # Variables set by compsets, but are usually overridden by later
+    # scripts.  In some conditions, they may not be overridden.  I
+    # give them empty defaults here to retain backward-compatibility
+    LONB=''
+    LATB=''
+    LONR=''
+    LATR=''
+    im=''
+    jm=''
+
+    # NGAC/GOCART variables, used for logic in this script.
+    ldiag3d=''
+    RUN_ENTHALPY=''
+
+    #  "This script is NOT complete for running multiple ensemble
+    #  members." - gfs_fcst_run
+    #  Do not change these variables:
+    ENS_SPS='.false.'
+    ENS_NUM='1'
+    GEFS_ENSEMBLE='0'
+
+########################################################################
+
+) [[[  ## End of argument list.  Beginning of script.
+
+
+cd "$RUNDIR"
+
+
+# Two methods of naming gfs files: parallel and production naming.
+
+if [[ -z "$RUN_NAME" ]] ; then # No "RUN_NAME" so parallel naming
+    ic_file() {
+        echo $IC_DIR/$1.$CDATE   # $1 = gfsanl, etc.
+    }
+else
+    ic_file() {
+        echo "${IC_DIR}/${RUN_NAME}.t${CDATE:8:10}z.$1" # $1 = gfsanl, etc
+    }
+    export SIGO="./${RUN_NAME}.t${CDATE:8:10}z.sigf"'${FH}'
+    export FLXO="./${RUN_NAME}.t${CDATE:8:10}z.flxf"'${FH}'
+    export SFCO="./${RUN_NAME}.t${CDATE:8:10}z.sfcf"'${FH}'
+    export AERO="./${RUN_NAME}.t${CDATE:8:10}z.aerf"'${FH}'
+    export LOGO="./${RUN_NAME}.t${CDATE:8:10}z.logf"'${FH}'
+    export NSTO="./${RUN_NAME}.t${CDATE:8:10}z.nstf"'${FH}'
+    export D3DO="./${RUN_NAME}.t${CDATE:8:10}z.d3df"'${FH}'
+    export G3DO="./${RUN_NAME}.t${CDATE:8:10}z.g3df"'${FH}'
+fi
+
+########################################################################
+
+# Script logic.  This creates the derived environment variables for
+# exglobal_fcst.
+
+fhmax=${fhmax:-$NHRS}
+export FHMAX=$fhmax
+export PE1=$TASKS
+
+if [[ "$GEFS_ENSEMBLE" != 0 ]] ; then
+    echo "This script does not work for GEFS ENSEMBLE" 1>&2
+    exit 13
+fi
+
+# Translate to exglobal_fcst machine naming convention
+platname=@[plat%PLATFORM_NAME]
+case "$platname" in
+    wcoss*cray*)     export machine=WCOSS_C   ;;
+    wcoss*phase*)    export machine=WCOSS     ;;
+    *gaea*)          export machine=GAEA      ;;
+    *theia*)         export machine=THEIA     ;;
+    *)
+        echo "ERROR: This script does not support platform $platname" 1>&2
+        exit 12
+        ;;
+esac
+unset platname
+
+# ------------------------------------------------------------
+
+# Chemistry settings
+
+if [[ ! -e "@[FIXGLOBAL]/global_h2o_pltc.f77" \
+     && -e "@[FIX_LANDSFC_GAYNO]/global_h2o_pltc.f77" ]] ; then
+    export H2OFORC="@[FIX_LANDSFC_GAYNO]/global_h2o_pltc.f77"
+fi
+
+if [[ "$GOCART" == 0 ]] ; then
+    export PASSIVE_TRACER=${PASSIVE_TRACER:-.true.}
+    export PARM_NGAC=@[PARM]
+
+    # These variables were hard-coded in the old scripts.
+
+    export LDFIFLTO=.true.
+    export FTSFS=0.0
+    export FAISS=0.0
+    export IEMS='0'
+    export ISOL='1'
+    export ICO2='2'
+    export IAER='111'
+    export FHCYC='24'
+    export FNTSFA=
+    export FNACNA=
+else
+    # GOCART version of scripts had fewer hard-coded variables.
+    export PASSIVE_TRACER=${PASSIVE_TRACER:-.false.}
+    export LDFIFLTO=.false.
+    export POSTGPVARS=${POSTGPVARS:-'gocart_on=.true.'}
+fi
+
+# Filename selection and count.  In GOCART mode, we let the
+# exglobal_fcst.sh script decide this instead.
+if [[ "$GOCART" == 0 ]] ; then
+    export NUM_FILE=1
+    if [[ "$ADIABATIC" == .true. ]] ; then
+        export FILENAME_BASE="'SIG.F'"
+        export FILE_IO_FORM="'grib'"
+    else
+        export FILENAME_BASE="'SIG.F' 'SFC.F' 'FLX.F'"
+        export FILE_IO_FORM="'bin4' 'bin4' 'bin4'"
+        NUM_FILE=$(( NUM_FILE + 2 ))
+        if [ $NST_FCST -gt 0 ] ; then
+            export FILENAME_BASE=${FILENAME_BASE}" 'NST.F'"
+            export FILE_IO_FORM=${FILE_IO_FORM}" 'bin4'"
+            NUM_FILE=$(( NUM_FILE+1 ))
+        fi
+    fi
+fi
+
+# ------------------------------------------------------------
+
+export PROCESS_SPLIT=.false.
+export MASS_DP=.false.
+if [[ "$NDSLFV" == .true. ]] ; then
+    export MASS_DP=.true.
+fi
+
+# ------------------------------------------------------------
+
+if [ $IDEA = .true. ]; then
+#***************************************************************
+#                    N2 ,    H2O,     O3,        CLW,    O,      O2
+ export CPIlist=" 1039.645, 1846.0, 820.2391,    0.0, 1299.185, 918.0969"
+ export RIlist="  296.8034, 461.50, 173.2247,    0.0,  519.674, 259.837 "
+#***************************************************************
+ export NTRAC=5
+ export NTO=4
+ export NTO2=5
+elif [[ "$GOCART" == 0 ]] ; then
+#                   Dry ,    H2O,     O3,        CLW,    O,      O2
+export CPIlist=" 1004.6,   1846.0, 820.2391,    0.0"
+export RIlist="  286.05,   461.50, 173.2247,    0.0"
+
+fi
+
+export SLG="$semilag"
+if [ $semilag = .true. ] ; then
+    export gfsio_out=.false.
+    export out_virttemp=.false.
+    export zflxtvd=.false.
+    export shuff_lats_a=.false.
+    export shuff_lats_r=.false.
+    export NTRAC=3
+    export FTSFS=90
+    export FAISS=99999
+    export cnvgwd=.true.
+#jw     export dtphys=450
+    export cdmbgwd=0.25,2.0
+    export HOUTASPS=12
+    export IGEN=82
+    export CPIlist=
+    export RIlist=
+else
+#   export zflxtvd=.true.
+   export shuff_lats_a=.true.
+   export shuff_lats_r=.true.
+fi
+
+#for c in $( seq 1 $ENS_NUM ) ; do
+#    eval "export PE$c=\${PE$c:-0}"
+#done
+
+nhours="$NHRS"
+NDAYS=$(( NHRS / 24 ))
+ndays="$NDAYS"
+
+if [ $IDEA = .true. ]; then
+    export lm=150;
+    export levr=90
+    export DELTIM=180
+    @[NCP] @[PARM]/wam_input_f107_kp.txt .
+fi
+
+if [[ "$fcst_begin" == YES ]] ; then
+    export nhourb=0 FHROT=0 RESTART=.false.
+elif [[ -s $RUNDIR/grdr1 ]] ; then
+    export nhourb=$( $nemsioget $RUNDIR/grdr1 nfhour )
+    export FHROT=$nhourb
+    export RESTART=.true.
+else
+    export nhourb=$((restart_ndays*24))
+    export FHROT=$nhourb
+    export RESTART=.false.
+fi
+
+set -a
+source @[FCST_SCRIPT_DIR]/@[CONFIG]
+set +a
+
+if [ $IALB -eq 1 -a $isot -eq 1 -a $ivegsrc -eq 1 ]; then
+    export FNABSC=@[FIX_LANDSFC_GAYNO]/global_mxsnoalb.uariz.t$JCAP.$LONB.$LATB.rg.grb
+    export FNALBC=@[FIX_LANDSFC_GAYNO]/global_snowfree_albedo.bosu.t$JCAP.$LONB.$LATB.rg.grb
+    export FNVETC=@[FIX_LANDSFC_GAYNO]/global_vegtype.igbp.t$JCAP.$LONB.$LATB.rg.grb
+    export FNSOTC=@[FIX_LANDSFC_GAYNO]/global_soiltype.statsgo.t$JCAP.$LONB.$LATB.rg.grb
+    export FNZORC="igbp"
+    export FNALBC2=@[FIX_LANDSFC_GAYNO]/global_albedo4.1x1.grb
+fi
+
+########################################################################
+# Copy input files
+
+ls $IC_DIR/*anl* || /bin/true
+
+  if [[ "$NEMSIO_IN" == '.true.' ]] ; then
+    export SIGHDR="$nemsioget"
+    if [[ "$IDEA" == '.true.' ]] ; then
+        @[NCP] $IC_DIR/*anl*${CDATE} ${RUNDIR}/. # Note: missing ic_file logic
+    else
+        if [[ "$fcst_begin" == YES ]] ; then
+            @[NCP] $( ic_file gfsanl ) $RUNDIR/gfsanl.$CDATE
+            @[NCP] $( ic_file sfnanl ) $RUNDIR/sfnanl.$CDATE
+            if [ $NST_FCST -gt 0 ] ; then
+                @[NCP] $( ic_file nsnanl ) $RUNDIR/nsnanl.$CDATE
+            fi
+        fi
+    fi
+  else
+    if [[ "$IDEA" == '.true.' ]] ; then
+        @[NCP] @[DATA_IDEA]/WAM_gh_l150/*anl*${CDATE} ${RUNDIR}/.
+    else
+        @[NCP] $( ic_file siganl ) ${RUNDIR}/siganl.$CDATE
+        @[NCP] $( ic_file sfcanl ) ${RUNDIR}/sfcanl.$CDATE
+        if [ $NST_FCST -gt 0 ] ; then
+            @[NCP] $( ic_file nstanl ) ${RUNDIR}/nstanl.$CDATE
+        fi
+    fi
+  fi
+
+  if [ -f $RUNDIR/grdr1 -a -f $RUNDIR/grdr2 -a -f $RUNDIR/sigr1 -a -f $RUNDIR/sigr2 -a -f $RUNDIR/sfcr ]; then
+    export GRDI=$RUNDIR/grdr1
+    export GRDI2=$RUNDIR/grdr2
+    export SIGI=$RUNDIR/sigr1
+    export SIGI2=$RUNDIR/sigr2
+    export SFCI=$RUNDIR/sfcr
+    if [ $NST_FCST -gt 0 ] ; then
+        export NSTI=$RUNDIR/nstr
+    fi
+    export FHINI=$( $nemsioget $GRDI nfhour |grep -i "nfhour"|awk -F" " '{print $2}' )
+  elif [[ ${fcst_begin} = YES ]] ; then
+    export GRDI=$RUNDIR/gfsanl.$CDATE
+    export SIGI=$RUNDIR/siganl.$CDATE
+    if [[ $NEMSIO_IN = .true. ]] ; then
+        export SFCI=$RUNDIR/sfnanl.$CDATE
+    else
+        export SFCI=$RUNDIR/sfcanl.$CDATE
+    fi
+    if [ $NST_FCST -gt 0 ] ; then
+        if [[ $NEMSIO_IN = .true. ]] ; then
+            export NSTI=$RUNDIR/nsnanl.$CDATE
+        else
+            export NSTI=$RUNDIR/nstanl.$CDATE
+        fi
+    fi
+    export FHINI=00
+  elif [[ -s $IC_DIR/sigf${nhourb} ]]; then
+    export GRDI=$IC_DIR/sigf${nhourb}
+    export SIGI=$IC_DIR/sigf${nhourb}
+    export SFCI=$IC_DIR/sfcf${nhourb}
+    export NSTI=$IC_DIR/nstf${nhourb}
+  fi
+
+#
+# ------------------------ post varables ----------------
+#
+if [[ $WRITE_DOPOST = '.true.' ]] ; then
+ if [[ $POST_GRIBVERSION = 'grib1' ]] ; then
+     export CTLFILE=@[DATA_POST]/gfs_cntrl.parm
+     ln -sf $CTLFILE fort.14
+ elif [[ $POST_GRIBVERSION = 'grib2' ]] ; then
+     export CTLFILE=@[DATA_POST]/postcntrl_gfs.xml
+     ln -sf $CTLFILE postcntrl.xml
+ fi
+ ln -sf griddef.out fort.110
+ @[NCP] @[DATA_POST]/eta_micro_lookup.dat ./eta_micro_lookup.dat
+fi
+
+#
+# ---------------------------------------- fcst ----------------------
+#
+if [[ "$GOCART" == 0 && $nhourb -lt $nhours ]] ; then
+  export FNTSFA=
+  export FNACNA=
+#
+  export FHOUT=${FHOUT:-$fout}
+  export FHZER=${FHZER:-$fzer}
+  export FHCYC=${FHCYC:-$fcyc}
+  export FHLWR=${FHLWR:-3600}
+  export FHSWR=${FHSWR:-3600}
+  export FHRES=${FHRES:-$FHMAX}
+  export FHROT=${FHROT:-0}
+#
+  export DYNVARS=${DYNVARS:-""}
+  export PHYVARS=${PHYVARS:-""}
+  export DYNVARS="$DYNVARS,NTKE=$NTKE,NTIW=$NTIW,NTLNC=$NTLNC,NTINC=$NTINC,NTO=$NTO,NTO2=$NTO2"
+  export PHYVARS="$PHYVARS,NTKE=$NTKE,NTIW=$NTIW,NTLNC=$NTLNC,NTINC=$NTINC,NTO=$NTO,NTO2=$NTO2"
+fi
+
+########################################################################
+
+# Execute the exglobal_fcst.sh script to generate initial conditions
+# but do not execute NEMS.x
+
+env PRERUN_STEP='exit 0'  @[exglobal_fcst.sh]
+
+########################################################################
+
+]]]

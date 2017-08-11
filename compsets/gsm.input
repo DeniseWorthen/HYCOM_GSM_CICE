@@ -1,0 +1,588 @@
+
+# Builds for the gsm:
+build gsm.x {
+    use plat
+    NEMS.x="@[plat%EXECrt]/NEMS_gsm.x"
+    modules.nems="@[plat%INCrt]/NEMS_gsm.x.modules"
+    md5sum="@[NEMS.x].md5"
+    target="@[NEMS.x]"
+    build=NEMSAppBuilder(NEMS.x="@[NEMS.x]",modules.nems="@[modules.nems]",
+                         OPTS="app=standaloneGSM",md5sum="@[md5sum]")
+}
+
+build gsm_gocart.x {
+    use plat
+    NEMS.x="@[plat%EXECrt]/NEMS_gocart.x"
+    modules.nems="@[plat%INCrt]/NEMS_gocart.x.modules"
+    target="@[NEMS.x]"
+    md5sum="@[NEMS.x].md5"
+    build=NEMSAppBuilder(NEMS.x="@[NEMS.x]",modules.nems="@[modules.nems]",
+                         OPTS="app=standaloneGSM%gocart",md5sum="@[md5sum]")
+}
+
+# Variables used by all tests:
+
+gsm_exglobal_common = {
+    use nems_vars
+    use common_vars
+    nems_configure='atm_nostep'
+    atm_model='gsm'
+    coupling_interval_fast_sec=' '
+}
+
+########################################################################
+# ------------------------- EULERIAN TESTS --------------------------- #
+########################################################################
+
+compset gfs_eulerian: gsm.x {
+    use gsm_exglobal_common
+    TEST_DESCR="GFS eulerian dycore,32 total proc (tasks), 1 thread, quilt, digital filter on reduced grid"
+    CNTL_NAME='GFS_EULERIAN'
+
+    GSM_IC_NAME="@[CNTL_NAME]"
+    GSM_IC_DIR="@[plat%BASELINE]/@[GSM_IC_NAME]"
+
+    COM="@[plat%COMrt]/@[TEST_NAME]"          # Test result area
+    RUNDIR_ROOT="@[plat%TMPrt]"
+    RUNDIR="@[RUNDIR_ROOT]/@[TEST_NAME]"      # Test work area
+    CNTL="@[plat%BASELINE]/@[CNTL_NAME]"      # Control baseline area
+    INPUTS="@[plat%INPUTS]"                   # Test input data
+
+    NTHREADS=1
+    TASKS=32
+
+    build=gsm.x
+
+    prep=nems_regtest_prep(
+        RUNDIR="@[RUNDIR]",modules="@[build%modules.nems]",
+        CNTL="@[CNTL]")
+
+    filters input {
+      # Parse any files that need variables from other scopes, and do
+      # not need fancy scripting.  Presently, this is just the NEMS
+      # and mediator init files.
+      #           WORK FILE <=method==  SOURCE
+      'atmos.configure'     <=atparse=  "@[CONF]/atmos.configure_gfs"
+      'nems.configure'      <=atparse=  "@[CONF]/nems.configure.@[nems_configure].IN"
+    }
+
+    prerun=run_exglobal_fcst(
+        NTHREADS=NTHREADS,TASKS=TASKS,RUNDIR=RUNDIR,IC_DIR=GSM_IC_DIR,
+        FHDFI=3,WRTPE_PER_GROUP=2)
+
+    # Specify output files:
+    criteria output {
+      # WORKFILE .comparison. TARGET
+            'sfcf03' .bitcmp. "@[CNTL]"
+            'flxf03' .bitcmp. "@[CNTL]"
+            'sigf03' .bitcmp. "@[CNTL]"
+            'sfcf06' .bitcmp. "@[CNTL]"
+            'flxf06' .bitcmp. "@[CNTL]"
+            'sigf06' .bitcmp. "@[CNTL]"
+            'sfcf12' .bitcmp. "@[CNTL]"
+            'flxf12' .bitcmp. "@[CNTL]"
+            'sigf12' .bitcmp. "@[CNTL]"
+            'sfcf24' .bitcmp. "@[CNTL]"
+            'flxf24' .bitcmp. "@[CNTL]"
+            'sigf24' .bitcmp. "@[CNTL]"
+            'sfcf48' .bitcmp. "@[CNTL]"
+            'flxf48' .bitcmp. "@[CNTL]"
+            'sigf48' .bitcmp. "@[CNTL]"
+   "@[build%target]" .md5cmp. "@[build%md5sum]"
+    }
+
+    spawn execute {
+        {"@[build%target]", ranks="@[TASKS]", threads="@[NTHREADS]"}
+    }
+}
+
+########################################################################
+
+compset wam_gh_l150: gsm.x {
+    use gfs_eulerian
+
+    TEST_DESCR="WAM enthalpy on general hybrid 2loop 150levels,32 compute tasks / 1 thread ,no quilting"
+    CNTL_NAME='WAM_gh_l150'
+
+    wallclock=1800
+
+
+    prerun=run_exglobal_fcst(
+        NTHREADS=NTHREADS,
+        TASKS=TASKS,
+        RUNDIR=RUNDIR,
+        IC_DIR=GSM_IC_DIR,
+        NHRS='24',CDATE='2011092300',QUILTING='.false.',IDEA='.true.',IDVC=3,
+        THERMODYN_ID=3,SFCPRESS_ID=2,SPECTRAL_LOOP=2,F107_KP_SIZE=16,
+        F107_KP_INTERVAL=10800,WAM_IPE_COUPLING='.true.',HEIGHT_DEPENDENT_G='.true.',
+        F107_KP_SKIP_SIZE=24,F107_KP_DATA_SIZE=56,FHDFI=3,grid_aldata='.false.',
+        WRTPE_PER_GROUP=2)
+
+    # Specify output files:
+    criteria output {
+      # WORKFILE .comparison. TARGET
+            'sfcf00' .bitcmp. "@[CNTL]"
+            'flxf00' .bitcmp. "@[CNTL]"
+            'sigf00' .bitcmp. "@[CNTL]"
+            'sfcf03' .bitcmp. "@[CNTL]"
+            'flxf03' .bitcmp. "@[CNTL]"
+            'sigf03' .bitcmp. "@[CNTL]"
+            'sfcf06' .bitcmp. "@[CNTL]"
+            'flxf06' .bitcmp. "@[CNTL]"
+            'sigf06' .bitcmp. "@[CNTL]"
+            'sfcf12' .bitcmp. "@[CNTL]"
+            'flxf12' .bitcmp. "@[CNTL]"
+            'sigf12' .bitcmp. "@[CNTL]"
+            'sfcf24' .bitcmp. "@[CNTL]"
+            'flxf24' .bitcmp. "@[CNTL]"
+            'sigf24' .bitcmp. "@[CNTL]"
+   "@[gsm.x%target]" .md5cmp. "@[gsm.x%md5sum]"
+    }
+}
+
+########################################################################
+
+compset wam_gh_l150_nemsio: gsm.x {
+    use gfs_eulerian
+
+    TEST_DESCR="WAM enthalpy on general hybrid 2loop 150levels,32 compute tasks / 1 thread ,with quilting and NEMSIO I/O"
+    CNTL_NAME='WAM_gh_l150_nemsio'
+
+    wallclock=1800
+    TASKS=33 # 32 compute + 1 quilt
+
+    prerun=run_exglobal_fcst(
+        NTHREADS=NTHREADS,
+        TASKS=TASKS,
+        RUNDIR=RUNDIR,
+        IC_DIR=GSM_IC_DIR,
+        NHRS=48,CDATE='2011092400',QUILTING='.true.',IDEA='.true.',IDVC=3,
+        THERMODYN_ID=3,SFCPRESS_ID=2,SPECTRAL_LOOP=2,F107_KP_SIZE=16,
+        F107_KP_INTERVAL=10800,WAM_IPE_COUPLING='.true.',HEIGHT_DEPENDENT_G='.true.',
+        F107_KP_SKIP_SIZE=24,F107_KP_DATA_SIZE=56,FHDFI=3,grid_aldata='.false.',
+        NEMSIO_IN='.true.', NEMSIO_OUT='.true.',WRTPE_PER_GROUP=1)
+
+    # Specify output files:
+    criteria output {
+      # WORKFILE .comparison. TARGET
+            'sfcf00' .bitcmp. "@[CNTL]"
+            'flxf00' .bitcmp. "@[CNTL]"
+            'sigf00' .bitcmp. "@[CNTL]"
+            'sfcf03' .bitcmp. "@[CNTL]"
+            'flxf03' .bitcmp. "@[CNTL]"
+            'sigf03' .bitcmp. "@[CNTL]"
+            'sfcf06' .bitcmp. "@[CNTL]"
+            'flxf06' .bitcmp. "@[CNTL]"
+            'sigf06' .bitcmp. "@[CNTL]"
+            'sfcf12' .bitcmp. "@[CNTL]"
+            'flxf12' .bitcmp. "@[CNTL]"
+            'sigf12' .bitcmp. "@[CNTL]"
+            'sfcf24' .bitcmp. "@[CNTL]"
+            'flxf24' .bitcmp. "@[CNTL]"
+            'sigf24' .bitcmp. "@[CNTL]"
+   "@[gsm.x%target]" .md5cmp. "@[gsm.x%md5sum]"
+    }
+}
+
+########################################################################
+# ---------------------- SEMILAGRANGIAN TESTS ------------------------ #
+########################################################################
+ 
+compset gfs_slg: gsm.x {
+    use gsm_exglobal_common
+    TEST_DESCR="Run SLG non-adiabatic test with NEMSIO and digital filter from NEMSIO initial conditions"
+    CNTL_NAME='GFS_SLG'
+
+    GSM_IC_NAME="@[CNTL_NAME]"
+    GSM_IC_DIR="@[plat%BASELINE]/@[GSM_IC_NAME]"
+
+    COM="@[plat%COMrt]/@[TEST_NAME]"          # Test result area
+    RUNDIR_ROOT="@[plat%TMPrt]"
+    RUNDIR="@[RUNDIR_ROOT]/@[TEST_NAME]"      # Test work area
+    CNTL="@[plat%BASELINE]/@[CNTL_NAME]"      # Control baseline area
+    INPUTS="@[plat%INPUTS]"                   # Test input data
+
+    NTHREADS=1
+    TASKS=33 # 32 compute + 1 quilt
+
+    wallclock=1800
+
+    build=gsm.x
+
+    prep=nems_regtest_prep(
+        RUNDIR="@[RUNDIR]",modules="@[build%modules.nems]",
+        CNTL="@[CNTL]")
+
+    filters input {
+      # Parse any files that need variables from other scopes, and do
+      # not need fancy scripting.  Presently, this is just the NEMS
+      # and mediator init files.
+      #           WORK FILE <=method==  SOURCE
+      'atmos.configure'     <=atparse=  "@[CONF]/atmos.configure_gfs"
+      'nems.configure'      <=atparse=  "@[CONF]/nems.configure.@[nems_configure].IN"
+    }
+
+    prerun=run_exglobal_fcst(
+        NTHREADS=NTHREADS,TASKS=TASKS,RUNDIR=RUNDIR,IC_DIR=GSM_IC_DIR,
+        NEMSIO_IN='.true.',NEMSIO_OUT='.true.',SIGIO_IN='.false.',
+        SIGIO_OUT='.false.',WRT_GROUP='1',WRTPE_PER_GROUP='1',
+        QUILTING='.true.',grid_aldata='.false.',FHRES='144',FHOUT='6',
+        LONB=192,LATB=94,LONR=192,LATR=94,fcyc=24,REDUCED_GRID='.true.',
+        NST_FCST=0,PASSIVE_TRACER='.false.',IEMS=1,ISOL=2,FHOUT_HF=1,
+        FHMAX_HF=12,semilag='.true.',SFCIO_OUT='.false.',FHDFI=3)
+        
+
+    # Specify output files:
+    criteria output {
+      #   WORKFILE .comparison. TARGET
+            'sigf00' .bitcmp. "@[CNTL]"
+            'sigf01' .bitcmp. "@[CNTL]"
+            'sigf24' .bitcmp. "@[CNTL]"
+            'sfcf00' .bitcmp. "@[CNTL]"
+            'sfcf01' .bitcmp. "@[CNTL]"
+            'sfcf24' .bitcmp. "@[CNTL]"
+            'flxf00' .bitcmp. "@[CNTL]"
+            'flxf01' .bitcmp. "@[CNTL]"
+            'flxf24' .bitcmp. "@[CNTL]"
+   "@[build%target]" .md5cmp. "@[build%md5sum]"
+    }
+
+    spawn execute {
+        {"@[build%target]", ranks="@[TASKS]", threads="@[NTHREADS]"}
+    }
+}
+
+########################################################################
+ 
+compset gfs_slg_rsthst: gsm.x {
+    use gfs_slg
+
+    TEST_DESCR="Run SLG restart from history file non-adiabatic test with NEMSIO and digital filter from NEMSIO initial conditions"
+
+    CNTL_NAME='GFS_SLG_RSTHST'
+    GSM_IC_NAME="GFS_SLG"
+
+    prep=nems_regtest_prep(
+        RUNDIR="@[RUNDIR]",modules="@[build%modules.nems]",
+        CNTL="@[CNTL]")
+
+    prerun=run_exglobal_fcst(
+        NTHREADS=NTHREADS,TASKS=TASKS,RUNDIR=RUNDIR,IC_DIR=GSM_IC_DIR,
+        NEMSIO_IN='.true.',NEMSIO_OUT='.true.',SIGIO_IN='.false.',
+        SIGIO_OUT='.false.',WRT_GROUP='1',WRTPE_PER_GROUP='1',
+        QUILTING='.true.',grid_aldata='.false.',FHRES='144',FHOUT='6',
+        LONB=192,LATB=94,LONR=192,LATR=94,fcyc=24,REDUCED_GRID='.true.',
+        NST_FCST=0,PASSIVE_TRACER='.false.',IEMS=1,ISOL=2,FHOUT_HF=1,
+        FHMAX_HF=12,semilag='.true.',SFCIO_OUT='.false.',FHROT=24,
+        fcst_begin='NO',restart_ndays=1,FHDFI=3)
+
+    # Specify output files:
+    criteria output {
+      #   WORKFILE .comparison. TARGET
+        'sigf30' .bitcmp. "@[CNTL]"
+        'sigf48' .bitcmp. "@[CNTL]"
+        'sfcf30' .bitcmp. "@[CNTL]"
+        'sfcf48' .bitcmp. "@[CNTL]"
+        'flxf30' .bitcmp. "@[CNTL]"
+        'flxf48' .bitcmp. "@[CNTL]"
+   "@[build%target]" .md5cmp. "@[build%md5sum]"
+    }
+}
+
+########################################################################
+
+compset gfs_slg_48pe: gsm.x {
+    use gfs_slg
+
+    GSM_IC_NAME='GFS_SLG'
+    CNTL_NAME='GFS_SLG_48PE'
+    TASKS=48
+    
+    prerun=run_exglobal_fcst(
+        NTHREADS=NTHREADS,TASKS=TASKS,RUNDIR=RUNDIR,IC_DIR=GSM_IC_DIR,
+        NEMSIO_IN='.true.',NEMSIO_OUT='.true.',SIGIO_IN='.false.',
+        SIGIO_OUT='.false.',WRT_GROUP='1',WRTPE_PER_GROUP='1',
+        QUILTING='.false.',grid_aldata='.false.',FHRES='144',FHOUT='6',
+        LONB=192,LATB=94,LONR=192,LATR=94,fcyc=24,REDUCED_GRID='.true.',
+        NST_FCST=0,PASSIVE_TRACER='.false.',IEMS=1,ISOL=2,semilag='.true.',
+        NHRS=24,SFCIO_OUT='.false.',FHDFI=3)
+
+    # Specify output files:
+    criteria output {
+      #   WORKFILE .comparison. TARGET
+        'flxf00' .bitcmp. "@[CNTL]"
+        'flxf06' .bitcmp. "@[CNTL]"
+        'flxf12' .bitcmp. "@[CNTL]"
+        'flxf24' .bitcmp. "@[CNTL]"
+        'sfcf00' .bitcmp. "@[CNTL]"
+        'sfcf06' .bitcmp. "@[CNTL]"
+        'sfcf12' .bitcmp. "@[CNTL]"
+        'sfcf24' .bitcmp. "@[CNTL]"
+        'sigf00' .bitcmp. "@[CNTL]"
+        'sigf06' .bitcmp. "@[CNTL]"
+        'sigf12' .bitcmp. "@[CNTL]"
+        'sigf24' .bitcmp. "@[CNTL]"
+   "@[build%target]" .md5cmp. "@[build%md5sum]"
+    }
+}
+
+########################################################################
+
+compset gfs_slg_adiabatic: gsm.x {
+    use gfs_slg
+
+    TEST_DESCR="Run SLG adiabatic test with NEMSIO and digital filter from NEMSIO initial conditions"
+    GSM_IC_NAME='GFS_SLG'
+    CNTL_NAME='GFS_SLG_ADIABATIC'
+
+    TASKS=32
+
+    prerun=run_exglobal_fcst(NHRS=24,ADIABATIC='.true.'
+        NTHREADS=NTHREADS,TASKS=TASKS,RUNDIR=RUNDIR,IC_DIR=GSM_IC_DIR,
+        NEMSIO_IN='.true.',NEMSIO_OUT='.true.',SIGIO_IN='.false.',
+        SIGIO_OUT='.false.',WRT_GROUP='1',WRTPE_PER_GROUP='1',
+        QUILTING='.false.',grid_aldata='.false.',FHRES='144',FHOUT='6',
+        LONB=192,LATB=94,LONR=192,LATR=94,fcyc=24,REDUCED_GRID='.true.',
+        NST_FCST=0,PASSIVE_TRACER='.false.',IEMS=1,ISOL=2,FHOUT_HF=1,
+        FHMAX_HF=0,semilag='.true.',SFCIO_OUT='.false.',FHDFI=3)
+
+    criteria output {
+      #   WORKFILE .comparison. TARGET
+        'sigf00' .bitcmp. "@[CNTL]"
+        'sigf06' .bitcmp. "@[CNTL]"
+        'sigf12' .bitcmp. "@[CNTL]"
+        'sigf24' .bitcmp. "@[CNTL]"
+
+   "@[build%target]" .md5cmp. "@[build%md5sum]"
+    }
+}
+
+########################################################################
+
+compset gfs_slg_land: gsm.x {
+    use gfs_slg
+
+    TEST_DESCR="Run SLG non-adiabatic test with NEMSIO and digital filter from NEMSIO initial conditions"
+    CNTL_NAME='GFS_SLG_LAND'
+
+    TASKS=33
+
+    prerun=run_exglobal_fcst(IALB=1,isot=1,ivegsrc=1,
+        NTHREADS=NTHREADS,TASKS=TASKS,RUNDIR=RUNDIR,IC_DIR=GSM_IC_DIR,
+        NEMSIO_IN='.true.',NEMSIO_OUT='.true.',SIGIO_IN='.false.',
+        SIGIO_OUT='.false.',WRT_GROUP='1',WRTPE_PER_GROUP='1',
+        QUILTING='.true.',grid_aldata='.false.',FHRES='144',FHOUT='6',
+        LONB=192,LATB=94,LONR=192,LATR=94,fcyc=24,REDUCED_GRID='.true.',
+        NST_FCST=0,PASSIVE_TRACER='.false.',IEMS=1,ISOL=2,FHOUT_HF=1,
+        FHMAX_HF=12,semilag='.true.',SFCIO_OUT='.false.',FHDFI=3)
+       
+    
+    criteria output {
+      #   WORKFILE .comparison. TARGET
+        'sigf00' .bitcmp. "@[CNTL]"
+        'sigf01' .bitcmp. "@[CNTL]"
+        'sigf24' .bitcmp. "@[CNTL]"
+        'sfcf00' .bitcmp. "@[CNTL]"
+        'sfcf01' .bitcmp. "@[CNTL]"
+        'sfcf24' .bitcmp. "@[CNTL]"
+        'flxf00' .bitcmp. "@[CNTL]"
+        'flxf01' .bitcmp. "@[CNTL]"
+        'flxf24' .bitcmp. "@[CNTL]"
+   "@[build%target]" .md5cmp. "@[build%md5sum]"
+    }
+}
+
+
+########################################################################
+
+compset gfs_slg_nsst: gsm.x {
+    use gfs_slg
+
+    TEST_DESCR="Run SLG non-adiabatic test with NEMSIO and digital filter from NEMSIO initial conditions"
+    CNTL_NAME='GFS_SLG_NSST'
+
+    TASKS=33
+
+    prerun=run_exglobal_fcst(ZSEA2=5,
+        NST_SPINUP=0,NST_RESERVED=0,ZSEA1=0,nst_anl='.false.'
+        NTHREADS=NTHREADS,TASKS=TASKS,RUNDIR=RUNDIR,IC_DIR=GSM_IC_DIR,
+        NEMSIO_IN='.true.',NEMSIO_OUT='.true.',SIGIO_IN='.false.',
+        SIGIO_OUT='.false.',WRT_GROUP='1',WRTPE_PER_GROUP='1',
+        QUILTING='.true.',grid_aldata='.false.',FHRES='144',FHOUT='1',
+        LONB=192,LATB=94,LONR=192,LATR=94,fcyc=24,REDUCED_GRID='.true.',
+        NST_FCST=2,PASSIVE_TRACER='.false.',IEMS=1,ISOL=2,FHOUT_HF=1,
+        FHMAX_HF=12,semilag='.true.',SFCIO_OUT='.false.',FHDFI=3)
+       
+    
+    criteria output {
+      #   WORKFILE .comparison. TARGET
+        'sigf00' .bitcmp. "@[CNTL]"
+        'sigf01' .bitcmp. "@[CNTL]"
+        'sigf24' .bitcmp. "@[CNTL]"
+        'sfcf00' .bitcmp. "@[CNTL]"
+        'sfcf01' .bitcmp. "@[CNTL]"
+        'sfcf24' .bitcmp. "@[CNTL]"
+        'nstf00' .bitcmp. "@[CNTL]"
+        'nstf01' .bitcmp. "@[CNTL]"
+        'nstf24' .bitcmp. "@[CNTL]"
+        'flxf00' .bitcmp. "@[CNTL]"
+        'flxf01' .bitcmp. "@[CNTL]"
+        'flxf24' .bitcmp. "@[CNTL]"
+   "@[build%target]" .md5cmp. "@[build%md5sum]"
+    }
+}
+
+########################################################################
+
+compset gfs_slg_stochy: gsm.x {
+    use gfs_slg
+    TEST_DESCR="Run SLG non-adiabatic test with NEMSIO and digital filter and stochastic physics from NEMSIO initial conditions"
+    GSM_IC_NAME='GFS_SLG'
+    CNTL_NAME='GFS_SLG_STOCHY'
+
+    wallclock=3600
+
+    prerun=run_exglobal_fcst(
+        skeb_import=1
+        sppt_import=1
+        shum_import=1
+        skeb_export=1
+        sppt_export=1
+        shum_export=1
+        SPPT='0.7, -999., -999., -999, -999'
+        SPPT_LOGIT='.true.'
+        SPPT_TAU='21600,2592500,25925000,7776000,31536000'
+        SPPT_LSCALE='500000,1000000,2000000,2000000,2000000'
+        SPPT_SFCLIMIT='.true.'
+        SHUM='0.006, -999., -999., -999, -999'
+        SHUM_TAU='2.16E4, 1.728E5, 6.912E5, 7.776E6, 3.1536E7'
+        SHUM_LSCALE='500.E3, 1000.E3, 2000.E3, 2000.E3, 2000.E3'
+        SKEB='0.8, -999, -999, -999, -999'
+        SKEB_TAU='2.164E4, 1.728E5, 2.592E6, 7.776E6, 3.1536E7'
+        SKEB_LSCALE='500.E3, 1000.E3, 2000.E3, 2000.E3, 2000.E3'
+        SKEB_VFILT=40
+        ISEED_SPPT='1,2,3,4,5'
+        ISEED_SHUM='6,7,8,9,10'
+        ISEED_SKEB='11,12,13,14,15'
+        NTHREADS=NTHREADS,TASKS=TASKS,RUNDIR=RUNDIR,IC_DIR=GSM_IC_DIR,
+        NEMSIO_IN='.true.',NEMSIO_OUT='.true.',SIGIO_IN='.false.',
+        SIGIO_OUT='.false.',WRT_GROUP='1',WRTPE_PER_GROUP='1',
+        QUILTING='.true.',grid_aldata='.false.',FHRES='144',FHOUT='6',
+        LONB=192,LATB=94,LONR=192,LATR=94,fcyc=24,REDUCED_GRID='.true.',
+        NST_FCST=0,PASSIVE_TRACER='.false.',IEMS=1,ISOL=2,FHOUT_HF=1,
+        FHMAX_HF=12,semilag='.true.',SFCIO_OUT='.false.',FHDFI=3)
+
+    # Specify output files:
+    criteria output {
+      #   WORKFILE .comparison. TARGET
+        'sigf00' .bitcmp. "@[CNTL]"
+        'sigf01' .bitcmp. "@[CNTL]"
+        'sigf24' .bitcmp. "@[CNTL]"
+        'sfcf00' .bitcmp. "@[CNTL]"
+        'sfcf01' .bitcmp. "@[CNTL]"
+        'sfcf24' .bitcmp. "@[CNTL]"
+        'flxf00' .bitcmp. "@[CNTL]"
+        'flxf01' .bitcmp. "@[CNTL]"
+        'flxf24' .bitcmp. "@[CNTL]"
+   "@[build%target]" .md5cmp. "@[build%md5sum]"
+    }
+}
+
+########################################################################
+
+compset gfs_slg_t574: gsm.x {
+    use gfs_slg
+    TEST_DESCR="Run T574 SLG non-adiabatic test with NEMSIO and digital filter from NEMSIO initial conditions"
+
+    CNTL_NAME='GFS_SLG_T574'
+
+    TASKS=96
+    walltime=2000
+
+    prerun=run_exglobal_fcst(CDATE='2012102400',NHRS=24,wave=574
+        NTHREADS=NTHREADS,TASKS=TASKS,RUNDIR=RUNDIR,IC_DIR=GSM_IC_DIR,
+        NEMSIO_IN='.true.',NEMSIO_OUT='.true.',SIGIO_IN='.false.',
+        SIGIO_OUT='.false.',WRT_GROUP='1',WRTPE_PER_GROUP='1',
+        QUILTING='.true.',grid_aldata='.false.',FHRES='144',FHOUT='6',
+        LONB=1152,LATB=576,LONR=1152,LATR=576,fcyc=24,REDUCED_GRID='.true.',
+        NST_FCST=0,PASSIVE_TRACER='.false.',IEMS=1,ISOL=2,
+        semilag='.true.',SFCIO_OUT='.false.',FHDFI=3)
+        
+    # Specify output files:
+    criteria output {
+      #   WORKFILE .comparison. TARGET
+        'sigf00' .bitcmp. "@[CNTL]"
+        'SIG.F06' .bitcmp. "@[CNTL]"
+        'SIG.F12' .bitcmp. "@[CNTL]"
+        'sigf24' .bitcmp. "@[CNTL]"
+        'sfcf00' .bitcmp. "@[CNTL]"
+        'SFC.F06' .bitcmp. "@[CNTL]"
+        'SFC.F12' .bitcmp. "@[CNTL]"
+        'sfcf24' .bitcmp. "@[CNTL]"
+        'flxf00' .bitcmp. "@[CNTL]"
+        'FLX.F06' .bitcmp. "@[CNTL]"
+        'FLX.F12' .bitcmp. "@[CNTL]"
+        'flxf24' .bitcmp. "@[CNTL]"
+   "@[build%target]" .md5cmp. "@[build%md5sum]"
+    }
+
+
+    spawn execute {
+        {"@[build%target]", ranks="@[TASKS]", threads="@[NTHREADS]",
+         ppn="@[plat%t574_ppn]"}
+    }
+}
+
+
+########################################################################
+# --------------------------- GOCART TESTS --------------------------- #
+########################################################################
+ 
+compset gfs_gocart_nemsio: gsm_gocart.x {
+    use gfs_slg
+    TEST_DESCR="Run SLG non-adiabatic test with NEMSIO and digital filter from NEMSIO initial conditions"
+    CNTL_NAME='GFS_GOCART_NEMSIO'
+
+    NTHREADS=1
+    TASKS=64
+
+    build=gsm_gocart.x
+
+    walltime=3600
+
+    prerun=run_exglobal_fcst(
+        RUN_NAME='ngac' # use production-style filename convention with $RUN=ngac
+        NHRS=24
+        GOCART_AER2POST='.false.'
+        NTHREADS=NTHREADS,TASKS=TASKS,RUNDIR=RUNDIR,IC_DIR=GSM_IC_DIR,
+        QUILTING='.true.',NEMSIO_IN='.true.',SIGIO_IN='.false.',
+        NEMSIO_OUT='.true.',SIGIO_OUT='.false.',SFCIO_OUT='.false.',
+        CDATE='2012071700',WRTPE_PER_GROUP='1',dtphys=3600,wave=126,
+        CONFIG='ngac_config',GOCART=1)
+        
+
+    # Specify output files:
+    criteria output {
+      #         WORKFILE .comparison. TARGET
+        'ngac.t00z.sigf00' .bitcmp. "@[CNTL]"
+        'ngac.t00z.sigf03' .bitcmp. "@[CNTL]"
+        'ngac.t00z.sigf06' .bitcmp. "@[CNTL]"
+        'ngac.t00z.sigf12' .bitcmp. "@[CNTL]"
+        'ngac.t00z.sigf24' .bitcmp. "@[CNTL]"
+        'ngac.t00z.sfcf00' .bitcmp. "@[CNTL]"
+        'ngac.t00z.sfcf03' .bitcmp. "@[CNTL]"
+        'ngac.t00z.sfcf06' .bitcmp. "@[CNTL]"
+        'ngac.t00z.sfcf12' .bitcmp. "@[CNTL]"
+        'ngac.t00z.sfcf24' .bitcmp. "@[CNTL]"
+        'ngac.t00z.aerf00' .bitcmp. "@[CNTL]"
+        'ngac.t00z.aerf03' .bitcmp. "@[CNTL]"
+        'ngac.t00z.aerf06' .bitcmp. "@[CNTL]"
+        'ngac.t00z.aerf12' .bitcmp. "@[CNTL]"
+        'ngac.t00z.aerf24' .bitcmp. "@[CNTL]"
+         "@[build%target]" .md5cmp. "@[build%md5sum]"
+    }
+
+    spawn execute {
+        {"@[build%target]", ranks="@[TASKS]", threads="@[NTHREADS]", ppn="@[plat%t574_ppn]"}
+    }
+}

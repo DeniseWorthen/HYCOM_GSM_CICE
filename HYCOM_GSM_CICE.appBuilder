@@ -25,7 +25,7 @@ case "$FULL_MACHINE_ID" in
         CHOSEN_MODULE=$FULL_MACHINE_ID/ESMF_NUOPC
         ;;
     wcoss*|theia)
-        CHOSEN_MODULE=$FULL_MACHINE_ID/ESMF_710_gsm
+        CHOSEN_MODULE=$FULL_MACHINE_ID/ESMF_NUOPC
         CONFOPT="coupled_intel_${MACHINE_ID:?}"
         ;;
 esac
