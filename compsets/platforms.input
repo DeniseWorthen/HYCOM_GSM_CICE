@@ -27,10 +27,10 @@ platform.defaults={
     BASELINE="@[INPUTS]" # Baseline input or output directory
 
     # Default locations for various data
-    FIX_LANDSFC="@[BASELINE]/data_GFS/fix.am_modified_orography/"
+    FIX_LANDSFC="@[BASELINE]/data_GFS/fix.am_new_land_sea_mask/"
     FIX_LANDSFC_GAYNO="@[BASELINE]/data_GFS/fix.gayno/"
 #    FIXGLOBAL="@[BASELINE]/data_GFS/fix.gayno/"
-    FIXGLOBAL="@[BASELINE]/data_GFS/fix.am_modified_orography/"
+    FIXGLOBAL="@[BASELINE]/data_GFS/fix.am_new_land_sea_mask/"
     FIX_RAD="@[FIXGLOBAL]"
     DATA_IDEA="@[BASELINE]"
     DATA_POST="@[BASELINE]/data_POST"
@@ -82,7 +82,6 @@ platform theia {
 
     # INPUTS is the input directory, which should contain fix and parm
     # files, plus any restarts or other inputs.
-    #BASELINE="/scratch4/NCEPDEV/nems/noscrub/emc.nemspara/RT/NEMSGSM/trunk-20170213/data"
     #BASELINE="/scratch4/NCEPDEV/nems/noscrub/emc.nemspara/RT/HYCOM_GSM_CICE"
     BASELINE="/scratch4/NCEPDEV/stmp4/Bin.Li/RT/HYCOM_GSM_CICE"
     BASELINE_TEMPLATE="@[BASELINE]"
@@ -105,8 +104,8 @@ platform theia {
         log_dir="@[TMPrt]/log"
         scheduler="moabtorque"
         entities=[[[
-  <!ENTITY SHORTQ "debug">
-  <!ENTITY LONGQ "debug">
+  <!ENTITY SHORTQ "batch">
+  <!ENTITY LONGQ "batch">
   <!ENTITY BUILDQ "service">
 ]]]
         build_resources=[[[

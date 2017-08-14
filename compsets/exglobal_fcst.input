@@ -75,8 +75,7 @@ embed bash run_exglobal_fcst(
     FHDFI=''
     ADIABATIC='.false.'
     REDUCED_GRID='.true.'
-    # FHZER='6'
-    FHZER='1'
+    FHZER='6'
     wave='62'
     lm='64'
     lsoil='4'
@@ -107,12 +106,16 @@ embed bash run_exglobal_fcst(
 
     # From rt_gfs.sh
 
-    IALB='0'            # [unused] - commented out in exglobal_fcst.sh
-    isot='0'            # [unused]
-    ivegsrc='2'         # [unused]
+#    IALB='0'            # [unused] - commented out in exglobal_fcst.sh
+#    isot='0'            # [unused]
+#    ivegsrc='2'         # [unused]
     FHOUT_HF='1'
     FHMAX_HF='0'
     PASSIVE_TRACER=''
+# 
+    IALB='1'            # [used]
+    isot='1'            # [used]
+    ivegsrc='1'         # [used]
 
     WAM_IPE_COUPLING='.false.'
     HEIGHT_DEPENDENT_G='.false.'

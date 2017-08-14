@@ -77,7 +77,7 @@ compset cfsr@20150401_1hr_nems@cold_gsm@slg@T574_cice@0.24_hycom@0.24: gsm.x {
     }
 
         
-    prerun=run_exglobal_fcst(
+    prerun=run_exglobal_fcst(IALB=1,isot=1,ivegsrc=1,
         NTHREADS=NTHREADS,TASKS=TASKS,RUNDIR=RUNDIR,IC_DIR=GSM_IC_DIR,
         NEMSIO_IN='.true.',NEMSIO_OUT='.true.',SIGIO_IN='.false.',
         SIGIO_OUT='.false.',WRT_GROUP='1',WRTPE_PER_GROUP='1',
@@ -158,7 +158,7 @@ compset cfsr@20150401_1hr_nems@cold_gsm@slg@T126_cice@0.24_hycom@0.24: gsm.x {
     }
 
         
-    prerun=run_exglobal_fcst(
+    prerun=run_exglobal_fcst(IALB=1,isot=1,ivegsrc=1,
         NTHREADS=NTHREADS,TASKS=TASKS,RUNDIR=RUNDIR,IC_DIR=GSM_IC_DIR,
         NEMSIO_IN='.true.',NEMSIO_OUT='.true.',SIGIO_IN='.false.',
         SIGIO_OUT='.false.',WRT_GROUP='1',WRTPE_PER_GROUP='1',
