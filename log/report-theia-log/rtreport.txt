@@ -1,0 +1,163 @@
+Run rocotostat...
+Generate report...
+WORKFLOW STARTED AT Thu Sep 28 15:07:30 2017 (+1506611250)
+Repository information:
+
+
+REPO TOP:
+Path: .
+Working Copy Root Path: /scratch4/NCEPDEV/nems/noscrub/Samuel.Trahan/nccmp/cice
+URL: https://svnemc.ncep.noaa.gov/projects/nems/apps/HYCOM-GSM-CICE/trunk
+Relative URL: ^/nems/apps/HYCOM-GSM-CICE/trunk
+Repository Root: https://svnemc.ncep.noaa.gov/projects
+Repository UUID: 281fb692-3a18-0410-826d-9e847983f365
+Revision: 97858
+Node Kind: directory
+Schedule: normal
+Last Changed Author: samuel.trahan@noaa.gov
+Last Changed Rev: 97139
+Last Changed Date: 2017-09-06 13:11:37 +0000 (Wed, 06 Sep 2017)
+
+
+EXTERNAL /scratch4/NCEPDEV/nems/noscrub/Samuel.Trahan/nccmp/cice/CHEM:
+Path: CHEM
+Working Copy Root Path: /scratch4/NCEPDEV/nems/noscrub/Samuel.Trahan/nccmp/cice/CHEM
+URL: https://svnemc.ncep.noaa.gov/projects/aerosol/chem/tags/chem_q3fy2017_lambda
+Relative URL: ^/aerosol/chem/tags/chem_q3fy2017_lambda
+Repository Root: https://svnemc.ncep.noaa.gov/projects
+Repository UUID: 281fb692-3a18-0410-826d-9e847983f365
+Revision: 97858
+Node Kind: directory
+Schedule: normal
+Last Changed Author: jun.wang@noaa.gov
+Last Changed Rev: 89115
+Last Changed Date: 2017-03-03 21:44:59 +0000 (Fri, 03 Mar 2017)
+
+
+EXTERNAL /scratch4/NCEPDEV/nems/noscrub/Samuel.Trahan/nccmp/cice/CICE:
+Path: CICE
+Working Copy Root Path: /scratch4/NCEPDEV/nems/noscrub/Samuel.Trahan/nccmp/cice/CICE
+URL: https://svnemc.ncep.noaa.gov/projects/CICE/branches/polar-project-4/lanl_cice
+Relative URL: ^/CICE/branches/polar-project-4/lanl_cice
+Repository Root: https://svnemc.ncep.noaa.gov/projects
+Repository UUID: 281fb692-3a18-0410-826d-9e847983f365
+Revision: 97858
+Node Kind: directory
+Schedule: normal
+Last Changed Author: bin.li@noaa.gov
+Last Changed Rev: 94800
+Last Changed Date: 2017-06-23 09:45:13 +0000 (Fri, 23 Jun 2017)
+
+
+EXTERNAL /scratch4/NCEPDEV/nems/noscrub/Samuel.Trahan/nccmp/cice/CICE_CAP:
+Path: CICE_CAP
+Working Copy Root Path: /scratch4/NCEPDEV/nems/noscrub/Samuel.Trahan/nccmp/cice/CICE_CAP
+URL: https://svnemc.ncep.noaa.gov/projects/CICE/branches/polar-project-4/lanl_cice_cap
+Relative URL: ^/CICE/branches/polar-project-4/lanl_cice_cap
+Repository Root: https://svnemc.ncep.noaa.gov/projects
+Repository UUID: 281fb692-3a18-0410-826d-9e847983f365
+Revision: 97858
+Node Kind: directory
+Schedule: normal
+Last Changed Author: xingren.wu@noaa.gov
+Last Changed Rev: 94376
+Last Changed Date: 2017-06-14 19:52:51 +0000 (Wed, 14 Jun 2017)
+
+
+EXTERNAL /scratch4/NCEPDEV/nems/noscrub/Samuel.Trahan/nccmp/cice/GSM:
+Path: GSM
+Working Copy Root Path: /scratch4/NCEPDEV/nems/noscrub/Samuel.Trahan/nccmp/cice/GSM
+URL: https://svnemc.ncep.noaa.gov/projects/gsm/trunk
+Relative URL: ^/gsm/trunk
+Repository Root: https://svnemc.ncep.noaa.gov/projects
+Repository UUID: 281fb692-3a18-0410-826d-9e847983f365
+Revision: 96484
+Node Kind: directory
+Schedule: normal
+Last Changed Author: jun.wang@noaa.gov
+Last Changed Rev: 96484
+Last Changed Date: 2017-08-10 19:40:18 +0000 (Thu, 10 Aug 2017)
+
+
+EXTERNAL /scratch4/NCEPDEV/nems/noscrub/Samuel.Trahan/nccmp/cice/HYCOM:
+Path: HYCOM
+Working Copy Root Path: /scratch4/NCEPDEV/nems/noscrub/Samuel.Trahan/nccmp/cice/HYCOM
+URL: https://svnemc.ncep.noaa.gov/projects/hycom/v2.2.98/branches/BinLi
+Relative URL: ^/hycom/v2.2.98/branches/BinLi
+Repository Root: https://svnemc.ncep.noaa.gov/projects
+Repository UUID: 281fb692-3a18-0410-826d-9e847983f365
+Revision: 97858
+Node Kind: directory
+Schedule: normal
+Last Changed Author: bin.li@noaa.gov
+Last Changed Rev: 95849
+Last Changed Date: 2017-07-18 15:17:37 +0000 (Tue, 18 Jul 2017)
+
+
+EXTERNAL /scratch4/NCEPDEV/nems/noscrub/Samuel.Trahan/nccmp/cice/NEMS:
+Path: NEMS
+Working Copy Root Path: /scratch4/NCEPDEV/nems/noscrub/Samuel.Trahan/nccmp/cice/NEMS
+URL: https://svnemc.ncep.noaa.gov/projects/nems/branches/nccmp-deliver
+Relative URL: ^/nems/branches/nccmp-deliver
+Repository Root: https://svnemc.ncep.noaa.gov/projects
+Repository UUID: 281fb692-3a18-0410-826d-9e847983f365
+Revision: 97902
+Node Kind: directory
+Schedule: normal
+Last Changed Author: samuel.trahan@noaa.gov
+Last Changed Rev: 97868
+Last Changed Date: 2017-09-27 12:48:36 +0000 (Wed, 27 Sep 2017)
+
+
+EXTERNAL /scratch4/NCEPDEV/nems/noscrub/Samuel.Trahan/nccmp/cice/NEMS/tests/produtil:
+Path: NEMS/tests/produtil
+Working Copy Root Path: /scratch4/NCEPDEV/nems/noscrub/Samuel.Trahan/nccmp/cice/NEMS/tests/produtil
+URL: https://svnemc.ncep.noaa.gov/projects/nceplibs/produtil/branches/nccmp_vars
+Relative URL: ^/nceplibs/produtil/branches/nccmp_vars
+Repository Root: https://svnemc.ncep.noaa.gov/projects
+Repository UUID: 281fb692-3a18-0410-826d-9e847983f365
+Revision: 97902
+Node Kind: directory
+Schedule: normal
+Last Changed Author: samuel.trahan@noaa.gov
+Last Changed Rev: 97699
+Last Changed Date: 2017-09-21 16:10:51 +0000 (Thu, 21 Sep 2017)
+
+
+BUILD gsm.x: SUCCEEDED
+
+TEST #1: PASS
+  Test cfsr@20150401_1hr_nems@cold_gsm@slg@T126_cice@0.24_hycom@0.24 starting at Thu Sep 28 15:22:34 UTC 2017 (SLG GSM-T126 CICE-0.24d HYCOM-0.24-d 1-hr cold start run)
+  Thu Sep 28 15:22:34 UTC 2017
+  sigf00: bit-for-bit identical
+  sigf01: bit-for-bit identical
+  sfcf00: bit-for-bit identical
+  sfcf01: bit-for-bit identical
+  flxf00: bit-for-bit identical
+  flxf01: bit-for-bit identical
+  restart_out.a: bit-for-bit identical
+  Executable did not change during test suite:
+    File: /scratch3/NCEPDEV/stmp2/Samuel.Trahan/rtgen.6563/exec/NEMS_gsm.x
+    Expected md5sum: 0a5ead631af6a901e0055fa441f1ab7c
+    Actual md5sum: 0a5ead631af6a901e0055fa441f1ab7c
+  TEST PASSED AT Thu Sep 28 15:31:04 UTC 2017
+
+TEST #2: PASS
+  Test cfsr@20150401_1hr_nems@cold_gsm@slg@T574_cice@0.24_hycom@0.24 starting at Thu Sep 28 15:23:09 UTC 2017 (SLG GSM-T574 CICE-0.24d HYCOM-0.24-d 1-hr cold start run)
+  Thu Sep 28 15:23:09 UTC 2017
+  sigf00: bit-for-bit identical
+  sigf01: bit-for-bit identical
+  sfcf00: bit-for-bit identical
+  sfcf01: bit-for-bit identical
+  flxf00: bit-for-bit identical
+  flxf01: bit-for-bit identical
+  restart_out.a: bit-for-bit identical
+  Executable did not change during test suite:
+    File: /scratch3/NCEPDEV/stmp2/Samuel.Trahan/rtgen.6563/exec/NEMS_gsm.x
+    Expected md5sum: 0a5ead631af6a901e0055fa441f1ab7c
+    Actual md5sum: 0a5ead631af6a901e0055fa441f1ab7c
+  TEST PASSED AT Thu Sep 28 15:36:31 UTC 2017
+WORKFLOW REPORT AT Thu Sep 28 15:36:46 2017 (+1506613006)
+Tests: 0 failed, 2 passed out of 2
+Builds: 0 failed, 1 passed out of 1
+REGRESSION TEST WAS SUCCESSFUL

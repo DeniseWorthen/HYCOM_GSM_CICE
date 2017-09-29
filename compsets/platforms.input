@@ -84,7 +84,7 @@ platform theia {
     # files, plus any restarts or other inputs.
     #BASELINE="/scratch4/NCEPDEV/nems/noscrub/emc.nemspara/RT/HYCOM_GSM_CICE"
     BASELINE="/scratch4/NCEPDEV/stmp4/Bin.Li/RT/HYCOM_GSM_CICE"
-    BASELINE_TEMPLATE="@[BASELINE]"
+    BASELINE_TEMPLATE="/scratch4/NCEPDEV/stmp4/Bin.Li/RT/HYCOM_GSM_CICE"
     INPUTS="@[BASELINE]"
 
     # PLATFORM DETECTION -----------------------------------------------
