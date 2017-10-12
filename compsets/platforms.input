@@ -82,9 +82,8 @@ platform theia {
 
     # INPUTS is the input directory, which should contain fix and parm
     # files, plus any restarts or other inputs.
-    #BASELINE="/scratch4/NCEPDEV/nems/noscrub/emc.nemspara/RT/HYCOM_GSM_CICE"
-    BASELINE="/scratch4/NCEPDEV/stmp4/Bin.Li/RT/HYCOM_GSM_CICE"
-    BASELINE_TEMPLATE="/scratch4/NCEPDEV/stmp4/Bin.Li/RT/HYCOM_GSM_CICE"
+    BASELINE="/scratch4/NCEPDEV/nems/noscrub/emc.nemspara/RT/HYCOM-GSM-CICE/trunk-20171012"
+    BASELINE_TEMPLATE="/scratch4/NCEPDEV/nems/noscrub/emc.nemspara/RT/HYCOM-GSM-CICE/trunk-20171012"
     INPUTS="@[BASELINE]"
 
     # PLATFORM DETECTION -----------------------------------------------

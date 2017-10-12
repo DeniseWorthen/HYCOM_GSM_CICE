@@ -19,3 +19,8 @@ module load xmlparse/v2.0.0
 module use -a /scratch3/NCEPDEV/nceplibs/modulefiles
 module load bacio/v2.0.2
 module load nemsio/v2.2.3
+
+
+# The nccmp is only used for cice output file verification.  It is not
+# needed for any other purpose.
+module load nccmp

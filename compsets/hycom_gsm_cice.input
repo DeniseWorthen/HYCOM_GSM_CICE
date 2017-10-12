@@ -97,6 +97,7 @@ compset cfsr@20150401_1hr_nems@cold_gsm@slg@T574_cice@0.24_hycom@0.24: gsm.x {
             'flxf00' .bitcmp. "@[CNTL]"
             'flxf01' .bitcmp. "@[CNTL]"
             'restart_out.a' .bitcmp. "@[CNTL]"
+            'history/iceh_01h.2015-04-01-03600.nc' .nccmp_vars. "@[CNTL]"
    "@[build%target]" .md5cmp. "@[build%md5sum]"
     }
 
@@ -178,6 +179,7 @@ compset cfsr@20150401_1hr_nems@cold_gsm@slg@T126_cice@0.24_hycom@0.24: gsm.x {
             'flxf00' .bitcmp. "@[CNTL]"
             'flxf01' .bitcmp. "@[CNTL]"
             'restart_out.a' .bitcmp. "@[CNTL]"
+            'history/iceh_01h.2015-04-01-03600.nc' .nccmp_vars. "@[CNTL]"
    "@[build%target]" .md5cmp. "@[build%md5sum]"
     }
 
