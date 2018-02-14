@@ -3,8 +3,8 @@
 # This script is responsible for loading modules for GSM build with ESMF v7
 
 module load intel/14.0.2 impi/5.1.1.109 netcdf/4.3.0 szip 
-module use /scratch4/NCEPDEV/nems/save/Gerhard.Theurich/Modulefiles
-module load esmf/7.1.0bs05-IMPI5.1.1.109
+module use -a /scratch4/NCEPDEV/nems/noscrub/emc.nemspara/soft/modulefiles
+module load esmf/7.1.0bs05.1
 
 module use -a /scratch3/NCEPDEV/nwprod/lib/modulefiles
 module load w3nco/v2.0.6
