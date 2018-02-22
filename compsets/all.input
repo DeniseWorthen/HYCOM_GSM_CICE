@@ -3,5 +3,5 @@ load 'nemscommon.input'
 load 'exglobal_fcst.input'
 load 'hycom_gsm_cice.input'
 
-run cfsr@20150401_1hr_nems@cold_gsm@slg@T126_cice@0.24_hycom@0.24 @ gfs, standard, baseline, slg
-run cfsr@20150401_1hr_nems@cold_gsm@slg@T574_cice@0.24_hycom@0.24 @ gfs, standard, baseline, slg
+run cfsr@20150401_1hr_nems@cold_gsm@slg@T574_cice@0.24_hycom@0.24 @ gfs, t574, standard, baseline, slg
+run cfsr@20150401_1hr_nems@cold_gsm@slg@T126_cice@0.24_hycom@0.24 @ gfs, t126, standard, baseline, slg
