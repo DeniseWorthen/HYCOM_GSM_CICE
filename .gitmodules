@@ -5,6 +5,7 @@
 [submodule "GSM"]
 	path = GSM
 	url = gerrit:EMC_GSM
+	branch = gridmask
 [submodule "CICE_SRC"]
 	path = CICE_SRC
 	url = gerrit:EMC_CICE
