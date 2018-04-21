@@ -689,6 +689,7 @@ export FNABSC=${FNABSC:-${FIXGLOBAL}/global_snoalb.1x1.grb}
 export FNMSKH=${FNMSKH:-${FIXGLOBAL}/seaice_newland.grb}
 export OROGRAPHY_UF=${OROGRAPHY_UF:-${FIXGLOBAL}/global_orography_uf.t$MTNRSLUF.${LONR}.${LATR}.grb}
 export FNSMCC=${FNSMCC:-${FIXGLOBAL}/global_soilmgldas.t${JCAP}.${LONR}.${LATR}.grb}
+export LAKEMASK=${LAKEMASK:-${FIXGLOBAL}/lmask.t${JCAP}.${LONR}.${LATR}}
 if [ ${lingg_a:-.true.} = .true. ]; then
 export OROGRAPHY=${OROGRAPHY:-${FIXGLOBAL}/global_orography.t$MTNRSL.${LONR}.${LATR}.grb}
 export LONSPERLAT=${LONSPERLAT:-${FIXGLOBAL}/global_lonsperlat.t$MTNRSL.${LONR}.${LATR}.txt}
@@ -1000,6 +1001,7 @@ ${NCP} $AERODIR/$AEROSOL_FILE     aerosol.dat
 ${NCP} $EMISDIR/$EMMISSIVITY_FILE sfc_emissivity_idx.txt
 ${NCP} $OROGRAPHY                 orography
 ${NCP} $OROGRAPHY_UF              orography_uf
+${NCP} $LAKEMASK                  lakemask
 
 ${NCP} $LONSPERLAT                lonsperlat.dat
 ${NCP} $LONSPERLAR                lonsperlar.dat

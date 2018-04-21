@@ -4,4 +4,4 @@ load 'exglobal_fcst.input'
 load 'hycom_gsm_cice.input'
 
 run cfsr_20150401_1hr_nems_cold_gsm_slg_T574_cice_0.24_hycom_0.24 @ gfs, t574, standard, baseline, slg
-run cfsr_20150401_1hr_nems_cold_gsm_slg_T126_cice_0.24_hycom_0.24 @ gfs, t126, standard, baseline, slg
+#run cfsr_20150401_1hr_nems_cold_gsm_slg_T126_cice_0.24_hycom_0.24 @ gfs, t126, standard, baseline, slg
