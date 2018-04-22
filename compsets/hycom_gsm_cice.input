@@ -31,7 +31,7 @@ gsm_exglobal_common = {
 compset cfsr_20150401_1hr_nems_cold_gsm_slg_T574_cice_0.24_hycom_0.24: gsm.x {
     use gsm_exglobal_common
     TEST_DESCR="SLG GSM-T574 CICE-0.24d HYCOM-0.24-d 1-hr cold start run"
-    CNTL_NAME='cfsr@20150401_1hr_nems@cold_gsm@slg@T574_cice@0.24_hycom@0.24'
+    CNTL_NAME='cfsr_20150401_1hr_nems_cold_gsm_slg_T574_cice_0.24_hycom_0.24'
 
     GSM_IC_NAME="GSM/T574"
     GSM_IC_DIR="@[plat%BASELINE]/@[GSM_IC_NAME]"
@@ -113,7 +113,7 @@ compset cfsr_20150401_1hr_nems_cold_gsm_slg_T574_cice_0.24_hycom_0.24: gsm.x {
 compset cfsr_20150401_1hr_nems_cold_gsm_slg_T126_cice_0.24_hycom_0.24: gsm.x {
     use gsm_exglobal_common
     TEST_DESCR="SLG GSM-T126 CICE-0.24d HYCOM-0.24-d 1-hr cold start run"
-    CNTL_NAME='cfsr@20150401_1hr_nems@cold_gsm@slg@T126_cice@0.24_hycom@0.24'
+    CNTL_NAME='cfsr_20150401_1hr_nems_cold_gsm_slg_T126_cice_0.24_hycom_0.24'
 
     GSM_IC_NAME="GSM/T126"
     GSM_IC_DIR="@[plat%BASELINE]/@[GSM_IC_NAME]"
