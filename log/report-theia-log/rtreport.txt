@@ -1,13 +1,12 @@
 Run rocotostat...
 Generate report...
-WORKFLOW STARTED AT Fri Feb 23 20:07:23 2018 (+1519416443)
+WORKFLOW STARTED AT Tue Apr 24 03:03:27 2018 (+1524539007)
 Repository information:
 
 
 REPO TOP:
-master 92140d7 [origin/master] revised compsets/all.input.
+coupling-test-1 77b3851 [origin/coupling-test-1] Check out NEMS multi-app-test
 Fetch URL: gerrit:EMC_HYCOM-GSM-CICE
- M NEMS
  M log/report-theia-log/build_gsm.x.log
  M log/report-theia-log/rtreport.txt
 
@@ -16,7 +15,7 @@ Entering 'CICE_SRC'
 Fetch URL: gerrit:EMC_CICE
 
 Entering 'GSM'
-(HEAD detached at 9637a90) 9637a90 Added missing files back in to repo
+(HEAD detached at d47e8b9) d47e8b9 Adding lake mask for coupling
 Fetch URL: gerrit:EMC_GSM
 
 Entering 'HYCOM'
@@ -24,15 +23,15 @@ Entering 'HYCOM'
 Fetch URL: gerrit:HYCOM_code
 
 Entering 'NEMS'
-master        965cee4 [origin/master] Tweaks to version tracking
+(HEAD detached at eac437a) eac437a Point to coupling-update branch of NEMSGSM and NEMSfv3gfs
 Fetch URL: gerrit:NEMS
 
 
 BUILD gsm.x: SUCCEEDED
 
 TEST #1: PASS
-  Test cfsr@20150401_1hr_nems@cold_gsm@slg@T126_cice@0.24_hycom@0.24 starting at Fri Feb 23 21:11:58 UTC 2018 (SLG GSM-T126 CICE-0.24d HYCOM-0.24-d 1-hr cold start run)
-  Fri Feb 23 21:11:58 UTC 2018
+  Test cfsr_20150401_1hr_nems_cold_gsm_slg_T574_cice_0.24_hycom_0.24 starting at Tue Apr 24 03:25:37 UTC 2018 (SLG GSM-T574 CICE-0.24d HYCOM-0.24-d 1-hr cold start run)
+  Tue Apr 24 03:25:37 UTC 2018
   sigf00: bit-for-bit identical
   sigf01: bit-for-bit identical
   sfcf00: bit-for-bit identical
@@ -42,28 +41,11 @@ TEST #1: PASS
   restart_out.a: bit-for-bit identical
   history/iceh_01h.2015-04-01-03600.nc: NetCDF variable data identical
   Executable did not change during test suite:
-    File: /scratch3/NCEPDEV/stmp2/Samuel.Trahan/rtgen.68986/exec/NEMS_gsm.x
-    Expected md5sum: 3c6c2c4d960014414fec6cb62997a88f
-    Actual md5sum: 3c6c2c4d960014414fec6cb62997a88f
-  TEST PASSED AT Fri Feb 23 21:19:40 UTC 2018
-
-TEST #2: PASS
-  Test cfsr@20150401_1hr_nems@cold_gsm@slg@T574_cice@0.24_hycom@0.24 starting at Fri Feb 23 21:12:58 UTC 2018 (SLG GSM-T574 CICE-0.24d HYCOM-0.24-d 1-hr cold start run)
-  Fri Feb 23 21:12:58 UTC 2018
-  sigf00: bit-for-bit identical
-  sigf01: bit-for-bit identical
-  sfcf00: bit-for-bit identical
-  sfcf01: bit-for-bit identical
-  flxf00: bit-for-bit identical
-  flxf01: bit-for-bit identical
-  restart_out.a: bit-for-bit identical
-  history/iceh_01h.2015-04-01-03600.nc: NetCDF variable data identical
-  Executable did not change during test suite:
-    File: /scratch3/NCEPDEV/stmp2/Samuel.Trahan/rtgen.68986/exec/NEMS_gsm.x
-    Expected md5sum: 3c6c2c4d960014414fec6cb62997a88f
-    Actual md5sum: 3c6c2c4d960014414fec6cb62997a88f
-  TEST PASSED AT Fri Feb 23 21:24:39 UTC 2018
-WORKFLOW REPORT AT Fri Feb 23 21:25:12 2018 (+1519421112)
-Tests: 0 failed, 2 passed out of 2
+    File: /scratch4/NCEPDEV/stmp4/emc.nemspara/rtgen.56587/exec/NEMS_gsm.x
+    Expected md5sum: 5c32749f2b49c204618767a99768aa68
+    Actual md5sum: 5c32749f2b49c204618767a99768aa68
+  TEST PASSED AT Tue Apr 24 03:36:13 UTC 2018
+WORKFLOW REPORT AT Tue Apr 24 03:38:10 2018 (+1524541090)
+Tests: 0 failed, 1 passed out of 1
 Builds: 0 failed, 1 passed out of 1
 REGRESSION TEST WAS SUCCESSFUL
