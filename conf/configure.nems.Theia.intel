@@ -24,9 +24,11 @@ include         $(TOP)/conf/configure.nems.NUOPC
 NETCDF_INC   = -I$(NETCDF)/include
 NETCDF_LIB   = -L$(NETCDF)/lib -lnetcdf
 
-LIBDIR=/scratch4/NCEPDEV/meso/noscrub/Ratko.Vasic/libs
+#LIBDIR=/scratch4/NCEPDEV/meso/noscrub/Ratko.Vasic/libs
+LIBDIR=/scratch3/NCEPDEV/nwprod/lib
 PARADIR=/contrib/nceplibs_ext/lib
-POSTDIR=/scratch2/portfolios/NCEPDEV/global/save/Shrinivas.Moorthi/nceppost_moorthi/sorc/ncep_post.fd
+#POSTDIR=/scratch2/portfolios/NCEPDEV/global/save/Shrinivas.Moorthi/nceppost_moorthi/sorc/ncep_post.fd
+POSTDIR=/scratch4/NCEPDEV/global/save/Shrinivas.Moorthi/nceppost_moorthi_redmem/sorc/ncep_post.fd
 
 NEMSIO_INC   = -I${LIBDIR}/incmod/nemsio
 NEMSIO_LIB   = -L${LIBDIR} -lnemsio
