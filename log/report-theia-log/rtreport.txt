@@ -1,13 +1,12 @@
 Run rocotostat...
 Generate report...
-WORKFLOW STARTED AT Mon Aug  6 13:34:09 2018 (+1533562449)
+WORKFLOW STARTED AT Tue Aug 14 22:09:53 2018 (+1534284593)
 Repository information:
 
 
 REPO TOP:
-mask_fix ed9caf9 [origin/mask_fix: ahead 1] point to top of mask_fix branch of NEMS
+chem_coupling-commit 59d59fd [origin/chem_coupling-commit] Check out NEMS chem_coupling
 Fetch URL: gerrit:EMC_HYCOM-GSM-CICE
- M GSM
  M log/report-theia-log/build_gsm.x.log
  M log/report-theia-log/rtreport.txt
 
@@ -16,7 +15,7 @@ Entering 'CICE_SRC'
 Fetch URL: gerrit:EMC_CICE
 
 Entering 'GSM'
-(HEAD detached at origin/gridmask) 3949f26 revised gfs_physics_aoi_var_mod.f.
+(HEAD detached at 3949f26) 3949f26 revised gfs_physics_aoi_var_mod.f.
 Fetch URL: gerrit:EMC_GSM
 
 Entering 'HYCOM'
@@ -24,15 +23,15 @@ Entering 'HYCOM'
 Fetch URL: gerrit:HYCOM_code
 
 Entering 'NEMS'
-mask_fix ef40cde [origin/mask_fix] add produtil external
+(HEAD detached at ba40768) ba40768 update error messages
 Fetch URL: gerrit:NEMS
 
 
 BUILD gsm.x: SUCCEEDED
 
 TEST #1: PASS
-  Test cfsr_20150401_1hr_nems_cold_gsm_slg_T574_cice_0.24_hycom_0.24 starting at Mon Aug 6 13:48:39 UTC 2018 (SLG GSM-T574 CICE-0.24d HYCOM-0.24-d 1-hr cold start run)
-  Mon Aug  6 13:48:39 UTC 2018
+  Test cfsr_20150401_1hr_nems_cold_gsm_slg_T574_cice_0.24_hycom_0.24 starting at Tue Aug 14 22:39:37 UTC 2018 (SLG GSM-T574 CICE-0.24d HYCOM-0.24-d 1-hr cold start run)
+  Tue Aug 14 22:39:37 UTC 2018
   sigf00: bit-for-bit identical
   sigf01: bit-for-bit identical
   sfcf00: bit-for-bit identical
@@ -42,11 +41,11 @@ TEST #1: PASS
   restart_out.a: bit-for-bit identical
   history/iceh_01h.2015-04-01-03600.nc: NetCDF variable data identical
   Executable did not change during test suite:
-    File: /scratch3/NCEPDEV/stmp2/Samuel.Trahan/rtgen.49299/exec/NEMS_gsm.x
-    Expected md5sum: 000595135ca839addf1385d615b0e63f
-    Actual md5sum: 000595135ca839addf1385d615b0e63f
-  TEST PASSED AT Mon Aug  6 13:59:19 UTC 2018
-WORKFLOW REPORT AT Mon Aug  6 14:00:02 2018 (+1533564002)
+    File: /scratch3/NCEPDEV/stmp2/emc.nemspara/rtgen.14825/exec/NEMS_gsm.x
+    Expected md5sum: c72d55210fed4c4581e976eb91c74e5f
+    Actual md5sum: c72d55210fed4c4581e976eb91c74e5f
+  TEST PASSED AT Tue Aug 14 22:51:18 UTC 2018
+WORKFLOW REPORT AT Tue Aug 14 22:53:05 2018 (+1534287185)
 Tests: 0 failed, 1 passed out of 1
 Builds: 0 failed, 1 passed out of 1
 REGRESSION TEST WAS SUCCESSFUL
