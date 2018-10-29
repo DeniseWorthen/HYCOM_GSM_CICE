@@ -1,11 +1,11 @@
 Run rocotostat...
 Generate report...
-WORKFLOW STARTED AT Thu Oct 18 21:09:18 2018 (+1539896958)
+WORKFLOW STARTED AT Fri Oct 26 16:27:25 2018 (+1540571245)
 Repository information:
 
 
 REPO TOP:
-build-env-mk-commit 4e92794 [origin/build-env-mk-commit] Check out NEMS build-env-mk
+build-update-wave2-commit 6bacc37 [origin/build-update-wave2-commit] Check out NEMS build-update-wave2
 Fetch URL: gerrit:EMC_HYCOM-GSM-CICE
  M log/report-theia-log/build_gsm.x.log
  M log/report-theia-log/rtreport.txt
@@ -23,15 +23,15 @@ Entering 'HYCOM'
 Fetch URL: gerrit:HYCOM_code
 
 Entering 'NEMS'
-(HEAD detached at 85b9edc) 85b9edc Bug fix: an #ifdef should have been a #if
+(HEAD detached at 9dcafb5) 9dcafb5 Use NEMSfv3gfs build-update-wave2 branch for commit test.
 Fetch URL: gerrit:NEMS
 
 
 BUILD gsm.x: SUCCEEDED
 
 TEST #1: PASS
-  Test cfsr_20150401_1hr_nems_cold_gsm_slg_T574_cice_0.24_hycom_0.24 starting at Thu Oct 18 21:38:47 UTC 2018 (SLG GSM-T574 CICE-0.24d HYCOM-0.24-d 1-hr cold start run)
-  Thu Oct 18 21:38:47 UTC 2018
+  Test cfsr_20150401_1hr_nems_cold_gsm_slg_T574_cice_0.24_hycom_0.24 starting at Fri Oct 26 16:59:25 UTC 2018 (SLG GSM-T574 CICE-0.24d HYCOM-0.24-d 1-hr cold start run)
+  Fri Oct 26 16:59:25 UTC 2018
   sigf00: bit-for-bit identical
   sigf01: bit-for-bit identical
   sfcf00: bit-for-bit identical
@@ -41,11 +41,11 @@ TEST #1: PASS
   restart_out.a: bit-for-bit identical
   history/iceh_01h.2015-04-01-03600.nc: NetCDF variable data identical
   Executable did not change during test suite:
-    File: /scratch3/NCEPDEV/stmp2/emc.nemspara/rtgen.61956/exec/NEMS_gsm.x
-    Expected md5sum: 9364905c9d82ad8e03d5f3273eaaba22
-    Actual md5sum: 9364905c9d82ad8e03d5f3273eaaba22
-  TEST PASSED AT Thu Oct 18 21:48:54 UTC 2018
-WORKFLOW REPORT AT Thu Oct 18 21:49:04 2018 (+1539899344)
+    File: /scratch3/NCEPDEV/stmp2/emc.nemspara/rtgen.71908/exec/NEMS_gsm.x
+    Expected md5sum: ad87a5c6ef1c7c02d094578633adb18b
+    Actual md5sum: ad87a5c6ef1c7c02d094578633adb18b
+  TEST PASSED AT Fri Oct 26 17:09:59 UTC 2018
+WORKFLOW REPORT AT Fri Oct 26 17:10:43 2018 (+1540573843)
 Tests: 0 failed, 1 passed out of 1
 Builds: 0 failed, 1 passed out of 1
 REGRESSION TEST WAS SUCCESSFUL
