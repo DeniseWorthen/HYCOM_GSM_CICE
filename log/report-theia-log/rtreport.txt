@@ -1,11 +1,11 @@
 Run rocotostat...
 Generate report...
-WORKFLOW STARTED AT Tue Nov 13 20:55:49 2018 (+1542142549)
+WORKFLOW STARTED AT Fri Feb  8 17:10:39 2019 (+1549645839)
 Repository information:
 
 
 REPO TOP:
-dell-produtil-commit baa7e72 [origin/dell-produtil-commit] Update NEMS to top of dell-produtil branch
+master       d468dd9 [origin/master] NEMS documentation updates:
 Fetch URL: gerrit:EMC_HYCOM-GSM-CICE
  M log/report-theia-log/build_gsm.x.log
  M log/report-theia-log/rtreport.txt
@@ -23,15 +23,15 @@ Entering 'HYCOM'
 Fetch URL: gerrit:HYCOM_code
 
 Entering 'NEMS'
-(HEAD detached at 6643bb2) 6643bb2 Add WCOSS Dell to the list of platforms to test.  Update commit branch to dell-produtil.
+(HEAD detached at 3d81ac1) 3d81ac1 Bug fix to theia slurm naming: platform name should be  theia.slurm.intel
 Fetch URL: gerrit:NEMS
 
 
 BUILD gsm.x: SUCCEEDED
 
 TEST #1: PASS
-  Test cfsr_20150401_1hr_nems_cold_gsm_slg_T574_cice_0.24_hycom_0.24 starting at Tue Nov 13 22:37:37 UTC 2018 (SLG GSM-T574 CICE-0.24d HYCOM-0.24-d 1-hr cold start run)
-  Tue Nov 13 22:37:37 UTC 2018
+  Test cfsr_20150401_1hr_nems_cold_gsm_slg_T574_cice_0.24_hycom_0.24 starting at Fri Feb 8 17:32:49 UTC 2019 (SLG GSM-T574 CICE-0.24d HYCOM-0.24-d 1-hr cold start run)
+  Fri Feb  8 17:32:49 UTC 2019
   sigf00: bit-for-bit identical
   sigf01: bit-for-bit identical
   sfcf00: bit-for-bit identical
@@ -41,11 +41,11 @@ TEST #1: PASS
   restart_out.a: bit-for-bit identical
   history/iceh_01h.2015-04-01-03600.nc: NetCDF variable data identical
   Executable did not change during test suite:
-    File: /scratch3/NCEPDEV/stmp2/emc.nemspara/rtgen.101814/exec/NEMS_gsm.x
-    Expected md5sum: 2122ecaf32f282342456ac8e6ee379e4
-    Actual md5sum: 2122ecaf32f282342456ac8e6ee379e4
-  TEST PASSED AT Tue Nov 13 22:48:17 UTC 2018
-WORKFLOW REPORT AT Tue Nov 13 22:50:09 2018 (+1542149409)
+    File: /scratch3/NCEPDEV/stmp1/emc.nemspara/rtgen.90089/exec/NEMS_gsm.x
+    Expected md5sum: 2f84ec7dab6cb3f4362b9d89c5665ad9
+    Actual md5sum: 2f84ec7dab6cb3f4362b9d89c5665ad9
+  TEST PASSED AT Fri Feb  8 17:43:15 UTC 2019
+WORKFLOW REPORT AT Fri Feb  8 17:43:32 2019 (+1549647812)
 Tests: 0 failed, 1 passed out of 1
 Builds: 0 failed, 1 passed out of 1
 REGRESSION TEST WAS SUCCESSFUL
